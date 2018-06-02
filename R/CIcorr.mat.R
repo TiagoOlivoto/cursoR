@@ -13,7 +13,7 @@ CIcorr.mat = function(data){
   names(vector) = "r"
   Corconf$Corr = vector$r
   Corconf =  plyr::mutate(Corconf,
-                          CI = (0.45304^Corr)*2.25152*(Nlinha^-0.50089),
+                          CI = (0.45304^abs(Corr))*2.25152*(Nlinha^-0.50089),
                           LL = Corconf - CI,
                           UL = Corconf + CI)
   return(Corconf)
