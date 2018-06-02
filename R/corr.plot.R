@@ -1,5 +1,6 @@
 corr.plot = function(Dataset,
                      prob = 0.05,
+                     sizepoint = 0.5,
                      minsize = 1.5,
                      maxsize = 2.5,
                      smooth = FALSE,
@@ -63,7 +64,7 @@ my_custom_cor = function(data, mapping, color = I("black"), sizeRange = c(minsiz
 
 my_custom_smooth = function(data, mapping, ...) {
   p = ggplot(data = data, mapping = mapping) +
-    geom_point(color = I("black"), size=0.33) +
+    geom_point(color = I("black"), size = sizepoint) +
     theme_classic() +
     theme(
       panel.background = element_rect(fill = "white", color = "gray50"),
@@ -72,9 +73,9 @@ my_custom_smooth = function(data, mapping, ...) {
       axis.text.y = element_blank(),
       axis.text.x = element_blank()
     )
-    if(smooth==TRUE){
+    if(smooth == TRUE){
       p = ggplot(data = data, mapping = mapping) +
-        geom_point(color = I("black"), size=0.33) +
+        geom_point(color = I("black"), size = sizepoint) +
     geom_smooth(method = "lm", size=0.3, color = I("red"), ...)+
     theme_classic() +
     theme(
