@@ -113,7 +113,7 @@ ggally_mysmooth = function(data, mapping, ...){
 ################ Plot Correlation ##############
 
 Plot=ggpairs(
-  Dataset[,1:7],
+  Dataset[,1:ncol(Dataset)],
   upper = list(continuous = my_custom_cor),
   lower = list(continuous = my_custom_smooth),
   diag = list(continuous = ggally_mysmooth),
