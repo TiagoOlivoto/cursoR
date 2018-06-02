@@ -14,6 +14,8 @@ Plota o coeficiente de correlação em uma visualização gráfico-numérica
 
   \item{prob}{A probabilidade de erro assumida para significância do coeficiente de correlação. Padrão é 0.05}
 
+  \item{sizepoint}{O tamanho do ponto que representa as ditribuições das variáveis. Padrão é 0.5}
+  
   \item{minsize}{O tamanho da letra para representar o menor coeficiente de correlação.}
 
   \item{maxsize}{O tamanho da letra para representar o maior coeficiente de correlação.}
