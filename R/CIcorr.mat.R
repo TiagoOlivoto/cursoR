@@ -14,8 +14,8 @@ CIcorr.mat = function(data){
   Corconf$Corr = vector$r
   Corconf =  plyr::mutate(Corconf,
                           CI = (0.45304^abs(Corr))*2.25152*(Nlinha^-0.50089),
-                          LL = Corconf - CI,
-                          UL = Corconf + CI)
+                          LL = Corr - CI,
+                          UL = Corr + CI)
   return(Corconf)
                      
 }
