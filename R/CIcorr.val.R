@@ -3,11 +3,14 @@ CIcorr.val = function(r, n) {
   UP=r+CI
   LP=r-CI
   cat("\n")
-  cat("Half-width of 95% confidence interval")
+  cat("-------------------------------------------------","\n")
+  cat("Nonparametric 95% half-width confidence interval", "\n")
+  cat("-------------------------------------------------","\n")
   cat(paste0("Level of significance: 5%","\n",
                                     "Correlation coefficient: ", r,
                                     "\nSample size: ", n,
                                     "\nConfidence interval: ", round(CI,4),
                                     "\nTrue parameter range from: ", round(LP,4)," to ",
-                                    round(UP,4)))
+                                    round(UP,4)),"\n")
+  cat("-------------------------------------------------")
 }
