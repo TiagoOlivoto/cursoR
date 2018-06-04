@@ -12,7 +12,10 @@ LazyData: true
 Imports: corrplot,
          ggplot2,
          GGally,
-         plyr
+         plyr,
+         MASS,
+         FWDselect,
+         diagram
 RoxygenNote: 6.0.1
 
 
