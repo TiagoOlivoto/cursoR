@@ -1,5 +1,11 @@
 corr.plot = function(Dataset,
                      prob = 0.05,
+                     export = FALSE,
+                     file.type = "pdf",
+                     file.name = NULL,
+                     width = 8,
+                     height = 7,
+                     resolution = 300,
                      sizepoint = 0.5,
                      minsize = 1.5,
                      maxsize = 2.5,
@@ -112,14 +118,34 @@ ggally_mysmooth = function(data, mapping, ...){
 
 ################ Plot Correlation ##############
 
-Plot=ggpairs(
+p1=ggpairs(
   Dataset[,1:ncol(Dataset)],
   upper = list(continuous = my_custom_cor),
   lower = list(continuous = my_custom_smooth),
   diag = list(continuous = ggally_mysmooth),
   axisLabels="none")
-
 theme_set(theme_gray()+theme(panel.spacing=grid::unit(0.15,"lines")))
-print(Plot)
+
+if (export  ==  F|FALSE) {
+  print(p1)
+} else
+  
+  if (file.type == "pdf"){
+    if (is.null(file.name)){
+      pdf("Scatterplot Correlation.pdf",width = width, height = height)
+    } else
+      pdf(paste0(file.name, ".pdf"), width = width, height = height)
+    print(p1)
+    dev.off()
+  }
+
+if (file.type == "tiff"){
+  if (is.null(file.name)){
+    tiff(filename = "Scatterplot Correlation.tiff",width = width, height = height, units = "in", compression = "lzw", res = resolution)
+  } else
+    tiff(filename = paste0(file.name, ".tiff"), width = width, height = height, units = "in", compression = "lzw", res = resolution)
+  print(p1)
+  dev.off()
+}
 
 }
