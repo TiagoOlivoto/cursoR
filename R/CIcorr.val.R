@@ -3,7 +3,8 @@ CIcorr.val = function(r, n) {
   UP=r+CI
   LP=r-CI
   cat("\n")
-  cat(paste0("Probability level: 5%","\n",
+  cat("Half-width of 95% confidence interval")
+  cat(paste0("Level of significance: 5%","\n",
                                     "Correlation coefficient: ", r,
                                     "\nSample size: ", n,
                                     "\nConfidence interval: ", round(CI,4),
