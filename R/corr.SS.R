@@ -1,6 +1,5 @@
 corr.SS = function(r, CI) {
   n=(CI/(0.45304^r*2.25152))^(1/-0.50089)
-  cat("\n")
   cat("-------------------------------------------------","\n")
   cat("Sample size planning for correlation coefficient","\n")
   cat("-------------------------------------------------","\n")
