@@ -2,7 +2,7 @@
 \alias{CIcorr.val}
 \title{Intervalo de confiança não paramétrico do coeficiente de correlação de Pearson}
 \usage{
-CIcorr.mat(r, n)
+CIcorr.val(r, n)
 }
 \description{
 Calcula a semi-amplitude do intervalo de confiança (p<0.05) do coeficiente de correlação com base na magnitude do r e tamanho de amostra declarados.
