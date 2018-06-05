@@ -12,3 +12,4 @@ importFrom("graphics", "par")
 importFrom("stats", "as.formula", "cor", "cor.test", "lm", "pf",
              "symnum")
 importFrom("utils", "combn", "winDialog")
+S3method(summary, path.coeff)
