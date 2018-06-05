@@ -63,7 +63,36 @@ if (export  ==  F|FALSE) {
                    self.shifty=0.05,
                    mx = -0.02,
                    my = -0.02)
-} 
+} else {
+  
+  par(mar=c(0,0,1,0))
+  diagram::plotmat(coeff,
+                   main = resp,
+                   curve = curve,
+                   pos = pos,
+                   absent = absent,
+                   relsize = relsize,
+                   name = names,
+                   dtext = dtext,
+                   lwd = lwd,
+                   lcol = lcol,
+                   box.lwd = box.lwd,
+                   cex.txt = cex.txt,
+                   box.type = box.type,
+                   box.size = box.size,
+                   box.prop = box.prop,
+                   box.col = box.col,
+                   arr.type = arr.type,
+                   arr.pos = arr.pos, 
+                   arr.lwd = arr.lwd,
+                   arr.col = arr.col,
+                   arr.length = arr.length,
+                   arr.width = arr.width,
+                   shadow.size = 0.005,
+                   self.cex = 0.55,
+                   self.shifty=0.05,
+                   mx = -0.02,
+                   my = -0.02)
   
   if (file.type == "pdf"){
     if (is.null(file.name)){
@@ -136,7 +165,7 @@ if (file.type == "tiff"){
                    my = -0.02)
   dev.off()
 }
- 
+}
 }
  
  
