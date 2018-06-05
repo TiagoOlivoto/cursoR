@@ -2,12 +2,13 @@ summary.path.coeff = function(object,
                               model = NULL,
                               export = FALSE,
                               file.name = "path_coeff",
+                              digits = 4,
                               ...){
   
 
 class = class(object)
 test = is.null(model)==F
-
+options(digits = digits)
 
 if (test == TRUE && class == "PATH"){
   stop("You cannot inform a model if the object to be summarized is of class 'PATH'.")
@@ -16,7 +17,7 @@ if (test == TRUE && class == "PATH"){
   if(export  ==  TRUE){
     sink(paste0(file.name,".txt"))
     options(max.print = 99999999, width = 100)
-    options(digits = 3)
+    options(digits = digits)
     if(class == "PATH"){
       cat("-------------------------------------------------------------------------------------------------","\n")
       cat("Multicollinearity diagnosis and goodness-of-fit", "\n")
@@ -61,7 +62,6 @@ if (test == TRUE && class == "PATH"){
     }
     
     if(class == "BRUTEPATH"){
-      options(digits = 4)
       cat("-----------------------------------------------------------------------------","\n")
       cat("Summary of fitted models", "\n")
       cat("-----------------------------------------------------------------------------","\n")
@@ -72,7 +72,6 @@ if (test == TRUE && class == "PATH"){
       cat("\n")
       
       if (is.null(model)==F){
-        options(digits = 3)
         model = paste0("Model ", model)
         
         object = object[["Models"]][[model]]
@@ -126,7 +125,6 @@ if (test == TRUE && class == "PATH"){
   }
     
     
-options(digits = 3)
 
 if(class == "PATH"){
 cat("--------------------------------------------------------------------------","\n")
@@ -172,7 +170,6 @@ cat("--------------------------------------------------------------------------"
 }
 
 if(class == "BRUTEPATH"){
-  options(digits = 4)
   cat("-----------------------------------------------------------------------------","\n")
   cat("Summary of fitted models", "\n")
   cat("-----------------------------------------------------------------------------","\n")
@@ -183,7 +180,6 @@ if(class == "BRUTEPATH"){
   cat("\n")
   
   if (is.null(model)==F){
-    options(digits = 3)
   model = paste0("Model ", model)
   
   object = object[["Models"]][[model]]
