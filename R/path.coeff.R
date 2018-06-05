@@ -119,6 +119,12 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
   if (NC > 100 & NC < 1000 ){
     cat(paste0("Multicolinearidade moderada! NC = ", round(NC,3), ". Oberve os outros indicadores do modelo para maiores detalhes."))
   }
+  
+  ultimo = data.frame(Peso=t(AvAvet[c(nrow(AvAvet)),])[-c(1),])
+  abs = data.frame(Peso = abs(ultimo[,"Peso"]))
+  rownames(abs) = rownames(ultimo)
+  ultimo = abs[order(abs[,"Peso"], decreasing = T), , drop = FALSE]
+  pesovarname = paste(rownames(ultimo), collapse = ' > ')
 
     return(structure(list(Coefficients = Coeff,
              Eigen = AvAvet,
@@ -129,6 +135,7 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
              R2 = R2,
              Residual = Residual,
              Response = resp,
+             Pesovar = pesovarname,
              plot = p1),
              class = "PATH"))
   
@@ -233,6 +240,12 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
     VIF = data.frame(diag(solve(cor.x)))
     names(VIF) = "VIF"
     
+    ultimo = data.frame(Peso=t(AvAvet[c(nrow(AvAvet)),])[-c(1),])
+    abs = data.frame(Peso = abs(ultimo[,"Peso"]))
+    rownames(abs) = rownames(ultimo)
+    ultimo = abs[order(abs[,"Peso"], decreasing = T), , drop = FALSE]
+    pesovarname = paste(rownames(ultimo), collapse = ' > ')
+    
     Results = list(Coefficients = Coeff,
                 Eigen = AvAvet,
                 VIF = VIF,
@@ -242,6 +255,7 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
                 R2 = R2,
                 Residual = Residual,
                 Response = resp,
+                Pesovar = pesovarname,
                 plot = p1)
     ModelEstimates[[paste("Model",modelcode)]] = Results
     
@@ -263,8 +277,11 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
     names(statistics) = c("Model", "AIC", "Numpred", "CN", "Determinant", "R2", "Residual", "maxVIF")
     cat("Done!","\n")
     cat("\n\n")
+    cat("--------------------------------------------------------------------------","\n")
     cat("Summary of the adjusted models","\n")
+    cat("--------------------------------------------------------------------------","\n")   
     print(statistics)
+    cat("--------------------------------------------------------------------------")
     return(structure(list(Models = ModelEstimates,
                 Summary = statistics),
                 class = "BRUTEPATH"))
