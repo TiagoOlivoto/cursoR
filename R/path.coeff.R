@@ -32,6 +32,7 @@ if (brutstepwise == FALSE){
   pred = pred
 
   x = data[,c(pred)]
+  names = colnames(x)
   y = data[, paste(resp)]
   cor.y = cor(x, y)
   cor.x = cor(x)
@@ -91,7 +92,7 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
   Aval = as.data.frame(eigen$values)
   names(Aval) = "Eigenvalues"
   Avet = as.data.frame(eigen$vectors)
-  names(Avet) = colnames(x)
+  names(Avet) = names
   AvAvet = cbind(Aval, Avet)
   Direct = solve(cor.x, cor.y)
   n = ncol(cor.x)
@@ -155,6 +156,7 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
                                   cluster = FALSE)
     pred = FDSel$Variable_names
     x = data[,c(pred)]
+    names = colnames(x)
     y = data[, paste(resp)]
     cor.y = cor(x, y)
     cor.x = cor(x)
@@ -215,7 +217,7 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
     Aval = as.data.frame(eigen$values)
     names(Aval) = "Eigenvalues"
     Avet = as.data.frame(eigen$vectors)
-    names(Avet) = colnames(x)
+    names(Avet) = names
     AvAvet = cbind(Aval, Avet)
     Direct = solve(cor.x, cor.y)
     n = ncol(cor.x)
