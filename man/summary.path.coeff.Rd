@@ -2,7 +2,7 @@
 \alias{summary.path.coeff}
 \title{Summary a path.coeff object}
 \usage{
-\method{summary}{path.coeff}(object, model = NULL, export = FALSE, file.name = "path_coeff", ...)
+\method{summary}{path.coeff}(object, model = NULL, export = FALSE, file.name = "path_coeff", digits = 4, ...)
 }
 
 \description{
@@ -20,6 +20,8 @@ Summary the  \code{path.coeff} object in two ways. By default, the results are s
 
   \item{file.name}{The name of the file if \code{export = TRUE} }
 
+  \item{digits}{The number of significant digits to be shown.}
+  
   \item{...}{Other parameters.}
 
 }
