@@ -129,14 +129,14 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
     return(structure(list(Coefficients = Coeff,
              Eigen = AvAvet,
              VIF = VIF,
+             plot = p1,
              Predictors = pred,
              CN = NC,
              Det = Det,
              R2 = R2,
              Residual = Residual,
              Response = resp,
-             Pesovar = pesovarname,
-             plot = p1),
+             Pesovar = pesovarname),
              class = "PATH"))
   
 }
@@ -249,14 +249,15 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
     Results = list(Coefficients = Coeff,
                 Eigen = AvAvet,
                 VIF = VIF,
+                plot = p1,
                 Predictors = pred,
                 CN = NC,
                 Det = Det,
                 R2 = R2,
                 Residual = Residual,
                 Response = resp,
-                Pesovar = pesovarname,
-                plot = p1)
+                Pesovar = pesovarname)
+    
     ModelEstimates[[paste("Model",modelcode)]] = Results
     
     statistics[i,1] = paste("Model",modelcode)
