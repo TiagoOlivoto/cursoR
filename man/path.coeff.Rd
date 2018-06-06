@@ -25,6 +25,35 @@ Estima os efeitos diretos e indiretos com base em um arquivo de dados contendo a
 
 }
 
+\value{
+\item{Corr.x}{A matrix de correlação das variáveis explicativas}
+
+\item{Corr.y}{O vetor de correlações de cada variável explicativa com a variável dependente}
+
+\item{Coefficients}{A matriz dos coeficientes de trilha. Os efeitos diretos são apresentados na diagonal e os indiretos, fora da diagonal (na coluna).}
+
+\item{Eigen}{Contém os autovalores e os autovetores da matrix de correlação das variáveis explicativas.}
+
+\item{VIF}{Um vetor com os valores dos fatores de inflação de variância (VIF).}
+
+\item{plot}{Um gráfico com os valores dos efeitos diretos em diferentes valores de k.}
+
+\item{Predictors}{As variáveis preditoras utilizadas no modelo.}
+
+\item{CN}{O número de condição.}
+
+\item{Det}{O determinante da matriz de correlação das variáveis explicativas.}
+
+\item{R2}{O coeficiente de determinação do modelo.}
+
+\item{Residual}{O efeito residual do modelo.}
+
+\item{Response}{A variável resposta utilizada no modelo.}
+
+\item{Pesovar}{Ordem das variáveis com os maiores pesos (componentes do autovetor) associadas ao autovalor de menor magnitude.}
+
+}
+
 \details{
 Quando \code{brutstepwise = TRUE}, uma série de regressões stepwise são ajustadas. A primeira regressão stepwise é ajustada considerando p-2 variáveis preditoras selecionadas, sendo p o número de variáveis do arquivo. O segundo modelo ajusta uma regressão considerando p-3 variávies selecionadas, e assim por diante até o último modelo, que considera apenas duas variáveis selecionadas. 
 }
