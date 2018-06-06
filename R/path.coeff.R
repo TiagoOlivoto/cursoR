@@ -126,8 +126,8 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
   ultimo = abs[order(abs[,"Peso"], decreasing = T), , drop = FALSE]
   pesovarname = paste(rownames(ultimo), collapse = ' > ')
 
-    return(structure(list(Corr.x = cor.x,
-                          Corr.y = cor.y,
+    return(structure(list(Corr.x = data.frame(cor.x),
+                          Corr.y = data.frame(cor.y),
                           Coefficients = data.frame(t(Coeff)),
                           Eigen = AvAvet,
                           VIF = VIF,
@@ -248,8 +248,8 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
     ultimo = abs[order(abs[,"Peso"], decreasing = T), , drop = FALSE]
     pesovarname = paste(rownames(ultimo), collapse = ' > ')
     
-    Results = list(Corr.x = cor.x,
-                   Corr.y = cor.y,
+    Results = list(Corr.x = data.frame(cor.x),
+                   Corr.y = data.frame(cor.y),
                    Coefficients = data.frame(t(Coeff)),
                    Eigen = AvAvet,
                    VIF = VIF,
