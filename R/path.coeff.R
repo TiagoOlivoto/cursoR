@@ -128,7 +128,7 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
 
     return(structure(list(Corr.x = cor.x,
                           Corr.y = cor.y,
-                          Coefficients = Coeff,
+                          Coefficients = data.frame(t(Coeff)),
                           Eigen = AvAvet,
                           VIF = VIF,
                           plot = p1,
@@ -250,7 +250,7 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
     
     Results = list(Corr.x = cor.x,
                    Corr.y = cor.y,
-                   Coefficients = Coeff,
+                   Coefficients = data.frame(t(Coeff)),
                    Eigen = AvAvet,
                    VIF = VIF,
                    plot = p1,
