@@ -126,18 +126,20 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
   ultimo = abs[order(abs[,"Peso"], decreasing = T), , drop = FALSE]
   pesovarname = paste(rownames(ultimo), collapse = ' > ')
 
-    return(structure(list(Coefficients = Coeff,
-             Eigen = AvAvet,
-             VIF = VIF,
-             plot = p1,
-             Predictors = pred,
-             CN = NC,
-             Det = Det,
-             R2 = R2,
-             Residual = Residual,
-             Response = resp,
-             Pesovar = pesovarname),
-             class = "PATH"))
+    return(structure(list(Corr.x = cor.x,
+                          Corr.y = cor.y,
+                          Coefficients = Coeff,
+                          Eigen = AvAvet,
+                          VIF = VIF,
+                          plot = p1,
+                          Predictors = pred,
+                          CN = NC,
+                          Det = Det,
+                          R2 = R2,
+                          Residual = Residual,
+                          Response = resp,
+                          Pesovar = pesovarname),
+                          class = "PATH"))
   
 }
   
@@ -246,17 +248,19 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
     ultimo = abs[order(abs[,"Peso"], decreasing = T), , drop = FALSE]
     pesovarname = paste(rownames(ultimo), collapse = ' > ')
     
-    Results = list(Coefficients = Coeff,
-                Eigen = AvAvet,
-                VIF = VIF,
-                plot = p1,
-                Predictors = pred,
-                CN = NC,
-                Det = Det,
-                R2 = R2,
-                Residual = Residual,
-                Response = resp,
-                Pesovar = pesovarname)
+    Results = list(Corr.x = cor.x,
+                   Corr.y = cor.y,
+                   Coefficients = Coeff,
+                   Eigen = AvAvet,
+                   VIF = VIF,
+                   plot = p1,
+                   Predictors = pred,
+                   CN = NC,
+                   Det = Det,
+                   R2 = R2,
+                   Residual = Residual,
+                   Response = resp,
+                   Pesovar = pesovarname)
     
     ModelEstimates[[paste("Model",modelcode)]] = Results
     
