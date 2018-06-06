@@ -1,6 +1,7 @@
 path.coeff = function(data,
                       resp,
                       pred = NULL,
+                      exclude = FALSE,
                       correction = NULL,
                       stepwise = FALSE,
                       brutstepwise = FALSE){
@@ -27,10 +28,15 @@ if (brutstepwise == FALSE){
   pred = sub("[^[:alpha:]]+", "", stepwise2$Step)[2:length(stepwise2$Step)]
   
   } else
-    pred = names(data)[-(which( colnames(data) == resp))]
+    pred = names(data)[-(which(colnames(data) == resp))]
 } else
-  pred = pred
-
+  
+  if (exclude == TRUE){
+    pred = names(data)[-(match(c(resp, pred), names(data)))]
+    } else{
+    pred = pred
+  }
+  
   x = data[,c(pred)]
   names = colnames(x)
   y = data[, paste(resp)]
@@ -94,9 +100,9 @@ if (brutstepwise == FALSE){
   eigen = eigen(cor.x)
   Det = det(cor.x)
   NC = max(eigen$values)/min(eigen$values)
-  Aval = as.data.frame(eigen$values)
+  Aval = data.frame(eigen$values)
   names(Aval) = "Eigenvalues"
-  Avet = as.data.frame(eigen$vectors)
+  Avet = data.frame(t(eigen$vectors))
   names(Avet) = names
   AvAvet = cbind(Aval, Avet)
   Direct = solve(cor.x, cor.y)
