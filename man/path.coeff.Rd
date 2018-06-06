@@ -2,7 +2,7 @@
 \alias{path.coeff}
 \title{Análise de trilha e diagnóstico de multicolinearidade}
 \usage{
-path.coeff(data, resp, pred = NULL, correction = NULL,
+path.coeff(data, resp, pred = NULL, exclude = FALSE, correction = NULL,
           stepwise = FALSE, brutstepwise = FALSE)
 }
 \description{
@@ -17,6 +17,8 @@ Estima os efeitos diretos e indiretos com base em um arquivo de dados contendo a
   
   \item{pred}{As variáveis preditoras. Padrão é \code{NULL}, ou seja, as variáveis preditoras são todas as outras variáveis do conjunto de dados, exceto 'resp', ou as variáveis selecionadas no procedimento stepwise (se stepwise = TRUE ou brutestepwise = TRUE) }
   
+  \item{exclude}{Argumento lógico, padrão FALSE. Se \code{exclude = TRUE}, as variáveis declaradas em \code{pred} são desconsideradas e somente o restante das variáveis do banco de dados (exceto a variável resposta) serão utilizadas no modelo.}
+    
   \item{correction}{Argumento lógico, padrão NULL. Um valor (k) a ser a adicionado na diagonal da matrix X'X visando reduzir o problema com a multicolinearidade.}
   
   \item{stepwise}{Argumento lógico, padrão FALSE. Se TRUE, um procedimento stepwise é realizado para a escolha das variáveis preditoras.}
@@ -36,7 +38,7 @@ Estima os efeitos diretos e indiretos com base em um arquivo de dados contendo a
 
 \item{VIF}{Um vetor com os valores dos fatores de inflação de variância (VIF).}
 
-\item{plot}{Um gráfico com os valores dos efeitos diretos em diferentes valores de k.}
+\item{plot}{Um gráfico com os valores dos efeitos diretos em diferentes valores de k. O gráfico não é gerado se um valor de correção é adicionado.}
 
 \item{Predictors}{As variáveis preditoras utilizadas no modelo.}
 
