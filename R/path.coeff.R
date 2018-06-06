@@ -41,50 +41,55 @@ if (brutstepwise == FALSE){
     
   } else
   cor.x = cor(x)
-  betas = data.frame(matrix(nrow = 101, ncol = length(pred)+1))
-  cc = 0
-  nvar = length(pred) + 1
-  for (i in 1:101){
-    cor.x2 = cor.x
-    diag(cor.x2) = diag(cor.x2) + cc
-    betas[i,1] = cc
-    betas[i,2:nvar] = t(solve(cor.x2, cor.y))
-    cc = cc + 0.01
-  }
-  names(betas) = paste0(c("K", pred))
-  xx <- betas$K
-  yy <- colnames(betas)
-  fila <- 101
-  col <- length(yy)
-  total <- fila * (col-1)
-  x <- character(length = total)
-  y <- character(length = total)
-  z <- numeric(length = total)
-  k <- 0
-  for (i in 1:fila) {
-    for (j in 2:col) {
-      k <- k  +  1
-      x[k] <- xx[i]
-      y[k] <- yy[j]
-      z[k] <- betas[i, j]
+  if (is.null(correction) == T){
+    betas = data.frame(matrix(nrow = 101, ncol = length(pred)+1))
+    cc = 0
+    nvar = length(pred) + 1
+    for (i in 1:101){
+      cor.x2 = cor.x
+      diag(cor.x2) = diag(cor.x2) + cc
+      betas[i,1] = cc
+      betas[i,2:nvar] = t(solve(cor.x2, cor.y))
+      cc = cc + 0.01
     }
-  }
-  betas = data.frame(K = x, VAR = y, direct = z)
-p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
-    geom_point()+
-    theme_bw() +
-    theme(axis.ticks.length = unit(.2, "cm"),
-          axis.text = element_text(size = 10, colour = "black"),
-          axis.title = element_text(size = 10, colour = "black"),
-          axis.ticks = element_line(colour = "black"),
-          legend.position = "bottom",
-          plot.margin = margin(0.1, 0.1, 0.1, 0.1, "cm"),
-          legend.title = element_blank(),
-          panel.border = element_rect(colour = "black", fill = NA, size = 1),
-          panel.grid.major.x = element_blank(), panel.grid.major.y = element_blank(),
-          panel.grid.minor.x = element_blank(), panel.grid.minor.y = element_blank()) +
-    labs(x = "k value", y = "beta value")+
-    scale_x_discrete(breaks=seq(0,1,by=0.1))
+    names(betas) = paste0(c("K", pred))
+    xx <- betas$K
+    yy <- colnames(betas)
+    fila <- 101
+    col <- length(yy)
+    total <- fila * (col-1)
+    x <- character(length = total)
+    y <- character(length = total)
+    z <- numeric(length = total)
+    k <- 0
+    for (i in 1:fila) {
+      for (j in 2:col) {
+        k <- k  +  1
+        x[k] <- xx[i]
+        y[k] <- yy[j]
+        z[k] <- betas[i, j]
+      }
+    }
+    x = as.numeric(x)
+    betas = data.frame(K = x, VAR = y, direct = z)
+    p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
+      geom_line(size = 1)+
+      theme_bw() +
+      theme(axis.ticks.length = unit(.2, "cm"),
+            axis.text = element_text(size = 12, colour = "black"),
+            axis.title = element_text(size = 12, colour = "black"),
+            axis.ticks = element_line(colour = "black"),
+            legend.position = "bottom",
+            plot.margin = margin(0.1, 0.1, 0.1, 0.1, "cm"),
+            legend.title = element_blank(),
+            panel.border = element_rect(colour = "black", fill = NA, size = 1),
+            panel.grid.major.x = element_blank(), panel.grid.major.y = element_blank(),
+            panel.grid.minor.x = element_blank(), panel.grid.minor.y = element_blank()) +
+      labs(x = "k values", y = expression(paste( beta, " values")))+
+      geom_abline(intercept = 0, slope = 0)+
+      scale_x_continuous(breaks=seq(0,1,by=0.1))
+    
+  } else {p1 = "No graphic generated due to correction value"}
 
   eigen = eigen(cor.x)
   Det = det(cor.x)
@@ -177,50 +182,55 @@ p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
     } else
       cor.x = cor(x)
     
-    betas = data.frame(matrix(nrow = 101, ncol = length(pred)+1))
-    cc = 0
-    nvar = length(pred) + 1
-    for (i in 1:101){
-      cor.x2 = cor.x
-      diag(cor.x2) = diag(cor.x2) + cc
-      betas[i,1] = cc
-      betas[i,2:nvar] = t(solve(cor.x2, cor.y))
-      cc = cc + 0.01
-    }
-    names(betas) = paste0(c("K", pred))
-    xx <- betas$K
-    yy <- colnames(betas)
-    fila <- 101
-    col <- length(yy)
-    total <- fila * (col-1)
-    x <- character(length = total)
-    y <- character(length = total)
-    z <- numeric(length = total)
-    k <- 0
-    for (i in 1:fila) {
-      for (j in 2:col) {
-        k <- k  +  1
-        x[k] <- xx[i]
-        y[k] <- yy[j]
-        z[k] <- betas[i, j]
+    if (is.null(correction) == T){
+      betas = data.frame(matrix(nrow = 101, ncol = length(pred)+1))
+      cc = 0
+      nvar = length(pred) + 1
+      for (i in 1:101){
+        cor.x2 = cor.x
+        diag(cor.x2) = diag(cor.x2) + cc
+        betas[i,1] = cc
+        betas[i,2:nvar] = t(solve(cor.x2, cor.y))
+        cc = cc + 0.01
       }
-    }
-    betas = data.frame(K = x, VAR = y, direct = z)
-    p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
-      geom_point()+
-      theme_bw() +
-      theme(axis.ticks.length = unit(.2, "cm"),
-            axis.text = element_text(size = 10, colour = "black"),
-            axis.title = element_text(size = 10, colour = "black"),
-            axis.ticks = element_line(colour = "black"),
-            legend.position = "bottom",
-            plot.margin = margin(0.1, 0.1, 0.1, 0.1, "cm"),
-            legend.title = element_blank(),
-            panel.border = element_rect(colour = "black", fill = NA, size = 1),
-            panel.grid.major.x = element_blank(), panel.grid.major.y = element_blank(),
-            panel.grid.minor.x = element_blank(), panel.grid.minor.y = element_blank()) +
-      labs(x = "k value", y = "beta value")+
-      scale_x_discrete(breaks=seq(0,1,by=0.1))
+      names(betas) = paste0(c("K", pred))
+      xx <- betas$K
+      yy <- colnames(betas)
+      fila <- 101
+      col <- length(yy)
+      total <- fila * (col-1)
+      x <- character(length = total)
+      y <- character(length = total)
+      z <- numeric(length = total)
+      k <- 0
+      for (i in 1:fila) {
+        for (j in 2:col) {
+          k <- k  +  1
+          x[k] <- xx[i]
+          y[k] <- yy[j]
+          z[k] <- betas[i, j]
+        }
+      }
+      x = as.numeric(x)
+      betas = data.frame(K = x, VAR = y, direct = z)
+      p1 = ggplot2::ggplot(betas, ggplot2::aes(K, direct, col = VAR)) +
+        geom_line(size = 1)+
+        theme_bw() +
+        theme(axis.ticks.length = unit(.2, "cm"),
+              axis.text = element_text(size = 12, colour = "black"),
+              axis.title = element_text(size = 12, colour = "black"),
+              axis.ticks = element_line(colour = "black"),
+              legend.position = "bottom",
+              plot.margin = margin(0.1, 0.1, 0.1, 0.1, "cm"),
+              legend.title = element_blank(),
+              panel.border = element_rect(colour = "black", fill = NA, size = 1),
+              panel.grid.major.x = element_blank(), panel.grid.major.y = element_blank(),
+              panel.grid.minor.x = element_blank(), panel.grid.minor.y = element_blank()) +
+        labs(x = "k values", y = expression(paste( beta, " values")))+
+        geom_abline(intercept = 0, slope = 0)+
+        scale_x_continuous(breaks=seq(0,1,by=0.1))
+      
+    } else {p1 = "No graphic generated due to correction value"}
     
     eigen = eigen(cor.x)
     Det = det(cor.x)
