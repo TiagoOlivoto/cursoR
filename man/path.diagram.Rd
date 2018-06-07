@@ -1,20 +1,19 @@
-\name{path.diagram}
-\alias{path.diagram}
+\name{diagram}
+\alias{diagram}
 \title{Diagrama de trilha com efeitos diretos e indiretos}
 
 \usage{
-path.diagram(model, digits = 3, curve = 0, pos = NULL, direct = TRUE,
-             relsize = 1, dtext = 0.15, lwd = 1, lcol = "black",
-             box.lwd = 0.5, cex.txt = 0.8, box.type = "hexa",
-             box.size = 0.08,  box.prop = 0.5, box.col = "gray90",
-             arr.type = "curved", arr.pos = 0.4, arr.lwd = 1,
-             arr.col = NULL, arr.length = 0.4, arr.width = 0.2,
-             export = FALSE, file.type = "pdf", file.name = NULL,
-             width = 8, height = 7, resolution = 300)
+diagram(model, digits = 3, symetrical = TRUE, curve = 0, pos = NULL,
+        diag = TRUE,relsize = 1, dtext = 0.15, lwd = 1, lcol = "black",
+        box.lwd = 0.5, cex.txt = 0.8, box.type = "hexa", box.size = 0.08,
+        box.prop = 0.5, box.col = "gray90", arr.type = "curved", arr.pos = 0.4,
+        arr.lwd = 1, arr.col = NULL, arr.length = 0.4, arr.width = 0.2,
+        export = FALSE, file.type = "pdf", file.name = NULL, width = 8,
+        height = 7, resolution = 300)
 }
 
 \description{
-Confecciona um diagrama de trilha dos efeitos diretos e indiretos com base em um modelo ajustado pela função "path.coef", ou qualquer matrix simétrica.
+Confecciona um diagrama de trilha dos efeitos diretos e indiretos com base em um modelo ajustado pela função "path.coef", ou qualquer matrix quadrada (simétrica ou não simétrica).
 
 }
 
@@ -23,12 +22,14 @@ Confecciona um diagrama de trilha dos efeitos diretos e indiretos com base em um
  \item{model}{O objeto \code{Coeff} criado pela função \code{path.coeff}, ou qualquer matrix simétrica}
  
  \item{digits}{O número de dígitos significativos a ser plotado.}
+ 
+ \item{symetrical}{Argumento lógico, padrão \code{TRUE}. Válido quando o diagrama é confeccionado com base em uma matriz externa. Se FALSE, os valores das duas diagonais (superior e inferior) são plotados}
   
  \item{curve}{Um valor, ou matriz da mesma dimensão de \code{Coeff} especificando a curvatura das setas. Padrão é 0, sem curvatura.}
 
  \item{pos}{Um vetor especificando o número de elementos em cada linha do gráfico.}
  
- \item{direct}{Argumento lógico, padrão TRUE. Se FALSE, os efeitos diretos não são plotados.}
+ \item{diag}{Argumento lógico, padrão TRUE. Se FALSE, os efeitos diretos não são plotados.}
   
  \item{relsize}{Tamanho relativo do gráfico. Parão é 1.}
  
