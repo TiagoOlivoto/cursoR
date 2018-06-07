@@ -161,13 +161,32 @@ if (brutstepwise == FALSE){
     ncolresp = which(colnames(data) == resp) 
     yyy = data[, ncolresp]
     xxx = data[-(which( colnames(data) == resp))]
+    cor.xx = cor(xxx)
+    VIF = data.frame(diag(solve(cor.xx)))
+    names(VIF) = "VIF"
+    VIF =  VIF[order(VIF[,"VIF"], decreasing = F), , drop = FALSE]
+   
+    repeat{
+      VIF2 = VIF[order(VIF[-1,], decreasing = F), , drop = FALSE]
+      pred2 = rownames(VIF2)
+      xxx2 = data[rownames(VIF2)]
+      VIF3 = data.frame(VIF = diag(solve(cor(xxx2))))
+      VIF3 = VIF3[order(VIF3[,"VIF"], decreasing = F), , drop = FALSE]
+      if (max(VIF3$VIF) < 10) break
+      VIF = VIF3
+      }
+    xxx = data[rownames(VIF3)]
     
+    cat(paste("The brutestepwise algorithm have selected a set of ",nrow(VIF3),
+              "predictors with largest VIF = ", round(max(VIF3$VIF),3)),".", "\n")
+    
+    selectedpred = rownames(VIF3)
     npred = ncol(xxx)-1
     statistics = data.frame(matrix(nrow = npred-1, ncol = 8))
     ModelEstimates = list()
     modelcode = 1
     nproced = npred - 1
-    
+    cat(paste("The algorithm will now start a stepwise regression and will fit ",nproced, " models." ), "\n\n")
     for (i in 1:nproced){
       
     FDSel =  FWDselect::selection(x = xxx,
@@ -175,7 +194,7 @@ if (brutstepwise == FALSE){
                                   q = npred,
                                   method = "lm",
                                   criterion = "aic",
-                                  cluster = FALSE)
+                                  cluster = F)
     pred = FDSel$Variable_names
     x = data[,c(pred)]
     names = colnames(x)
@@ -308,7 +327,8 @@ if (brutstepwise == FALSE){
     print(statistics)
     cat("--------------------------------------------------------------------------")
     return(structure(list(Models = ModelEstimates,
-                Summary = statistics),
+                Summary = statistics,
+                Selectedpred = selectedpred),
                 class = "BRUTEPATH"))
 
      }
