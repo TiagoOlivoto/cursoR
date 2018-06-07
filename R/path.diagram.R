@@ -1,8 +1,9 @@
-path.diagram = function(model,
+diagram = function(model,
                         digits = 3,
+                        symetrical = TRUE,
                         curve = 0,
                         pos = NULL,
-                        direct = TRUE,
+                        diag = TRUE,
                         relsize = 1,
                         dtext = 0.15,
                         lwd = 1,
@@ -25,12 +26,38 @@ path.diagram = function(model,
                         width = 8,
                         height = 7,
                         resolution = 300){
-coeff = model$Coefficients
-coeff = format(coeff, digits = digits)
-coeff = as.matrix(coeff)
-names = names(coeff)
-resp = paste0(model$Response, " as dependent variable")
-if (direct ==  TRUE){
+
+class = class(model)
+
+if (class == "matrix"){
+  
+  if(symetrical == TRUE){
+    coeff = cor
+    coeff = format(coeff, digits = digits)
+    coeff = as.matrix(coeff)
+    names = names(coeff)
+    coeff[lower.tri(coeff)] <- NA
+    resp = ""
+    
+  }else{
+  coeff = cor
+  coeff = format(coeff, digits = digits)
+  coeff = as.matrix(coeff)
+  names = names(coeff)
+  resp = ""
+  }
+  
+  
+} else{
+  coeff = model$Coefficients
+  coeff = format(coeff, digits = digits)
+  coeff = as.matrix(coeff)
+  names = names(coeff)
+  resp = paste0(model$Response, " as dependent variable")
+}
+
+
+if (diag ==  TRUE){
   absent = 0
 } else{absent = diag(coeff)}
 
