@@ -6,7 +6,7 @@ path.coeff(data, resp, pred = NULL, exclude = FALSE, correction = NULL,
           stepwise = FALSE, brutstepwise = FALSE)
 }
 \description{
-Estima os efeitos diretos e indiretos com base em um arquivo de dados contendo as variáveis
+Estima os efeitos diretos e indiretos com base em um arquivo de dados contendo um conjunto de variáveis. Um algorítmo é implementado visando seleção de um conjunto de preditores com mínima multicolinearidade e alto poder explicativo.
 
 }
 
@@ -57,7 +57,7 @@ Estima os efeitos diretos e indiretos com base em um arquivo de dados contendo a
 }
 
 \details{
-Quando \code{brutstepwise = TRUE}, uma série de regressões stepwise são ajustadas. A primeira regressão stepwise é ajustada considerando p-2 variáveis preditoras selecionadas, sendo p o número de variáveis do arquivo. O segundo modelo ajusta uma regressão considerando p-3 variávies selecionadas, e assim por diante até o último modelo, que considera apenas duas variáveis selecionadas. 
+Quando \code{brutstepwise = TRUE}, primeiramente, o algorítmo selecionará um conjunto de preditores com mínima multicolinearidade. A seleção é baseada no fator de inflação de variância (VIF). Um processo iterativo é realizado até que o máximo VIF observado seja menor que 10. As variáveis selecionadas neste processo são utilizadas em uma série de regressões stepwise. A primeira regressão stepwise é ajustada considerando p-1 variáveis preditoras selecionadas, sendo p o número de variáveis selecionadas no processo iterativo. O segundo modelo ajusta uma regressão considerando p-2 variávies selecionadas, e assim por diante até o último modelo, que considera apenas duas variáveis. Três objetos são criados. \code{Summary}, com o resumo do processo, \code{Models}, contendo os valores informados acima de todos os modelos ajustados; e \code{Selectedpred}, um vetor com o nome das variáveis selecionadas no processo iterativo.
 }
 
 \author{Tiago Olivoto \email{tiagoolivoto@gmail.com}}
