@@ -177,16 +177,18 @@ if (brutstepwise == FALSE){
       }
     xxx = data[rownames(VIF3)]
     
-    cat(paste("The brutestepwise algorithm have selected a set of ",nrow(VIF3),
-              "predictors with largest VIF = ", round(max(VIF3$VIF),3)),".", "\n")
-    
     selectedpred = rownames(VIF3)
     npred = ncol(xxx)-1
     statistics = data.frame(matrix(nrow = npred-1, ncol = 8))
     ModelEstimates = list()
     modelcode = 1
     nproced = npred - 1
-    cat(paste("The algorithm will now start a stepwise regression and will fit ",nproced, " models." ), "\n\n")
+    
+    cat(paste("The brutestepwise algorithm have selected a set of ",nrow(VIF3),
+              "predictors with largest VIF = ", round(max(VIF3$VIF),3)),
+        ". Now, a stepwise regression procedure will fit ",nproced, " models.", "\n")
+    
+    
     for (i in 1:nproced){
       
     FDSel =  FWDselect::selection(x = xxx,
