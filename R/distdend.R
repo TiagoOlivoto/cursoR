@@ -1,5 +1,6 @@
 distdend = function(data,
                     scale = FALSE,
+                    results = TRUE,
                     pvclust = FALSE,
                     nboot = 1000,
                     alpha = 0.95,
@@ -59,10 +60,15 @@ if (pvclust == TRUE){
   dend = NULL
 }
 
-return(list(graphic = out,
-            distances = mat,
-            pval = pval,
-            dend = dend))
+if (results == TRUE){
+  return(list(graphic = out,
+              distances = mat,
+              pval = pval,
+              dend = dend))
+} else{
+  return(out)
+}
+
  }
   }
 }
