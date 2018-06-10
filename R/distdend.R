@@ -58,7 +58,7 @@ if (pvclust == TRUE){
   pval = NULL
   dend = NULL
 }
-print(out)
+
 return(list(graphic = out,
             distances = mat,
             pval = pval,
