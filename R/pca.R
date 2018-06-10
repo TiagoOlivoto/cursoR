@@ -129,8 +129,9 @@ out = factoextra::fviz_pca_var(res.pca,
                                main = "",
                                ggtheme = theme,
                                ...)
-    print(out)
     return(out)
+
+
   }
   
   if (type == "var"){
@@ -138,7 +139,6 @@ out = factoextra::fviz_pca_var(res.pca,
                                    title = "",
                                    ggtheme = theme,
                                    ...)
-    print(out)
     return(out)
   }
   
@@ -147,7 +147,6 @@ out = factoextra::fviz_pca_var(res.pca,
                                    title = "",
                                    ggtheme = theme,
                                    ...)
-    print(out)
     return(out)
   }
   
@@ -156,7 +155,6 @@ out = factoextra::fviz_pca_var(res.pca,
                                       title = "",
                                       ggtheme = theme,
                                       ...)
-    print(out)
     return(out)
   }
  }
