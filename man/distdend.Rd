@@ -2,7 +2,7 @@
 \alias{distdend}
 \title{Análise de agrupamento com estimativas de distâncias e confecção de dendrogramas}
 \usage{
-pca(data, scale = FALSE, pvclust = FALSE, nboot = 1000,
+pca(data, scale = FALSE, results = TRUE, pvclust = FALSE, nboot = 1000,
   alpha = 0.95, distmethod = "euclidean", 
   clustmethod = "average", type = "rectangle", nclust = NULL, ...)
 }
@@ -16,6 +16,8 @@ Função para estimativa de distâncias em uma matriz de dupla entrada (genótipos e
 
  \item{scale}{Argumento lógico, padrão \code{TRUE}. Se \code{FALSE}, as variáveis não são padronizadas pelo desvio padrão..}
  
+ \item{results}{Argumento lógico, padrão \code{TRUE}. Os resultados numéricos da análise são retornados. Se \code{FALSE}, apenas o gráfico é mostrado.
+ }
  
  \item{pvclust}{Argumento lógico, padrão \code{false}. Se \code{TRUE} um procedimento de reamostragem bootstrap é utilizado para calcular p-valores para os agrupamentos hierárquicos.}
  
