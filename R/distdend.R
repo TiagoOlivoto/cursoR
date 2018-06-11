@@ -22,7 +22,7 @@ distdend = function(data,
     } else{
   if (pvclust == TRUE){
     set.seed(123)
-    dend = pvclust::pvclust(data,
+    dend = pvclust::pvclust(t(data),
                             method.dist = distmethod,
                             method.hclust = clustmethod,
                             nboot = nboot)
