@@ -12,7 +12,7 @@ distdend = function(data,
                     ...){
   
   if (scale == TRUE){
-    data = scale(data)
+    data = data.frame(scale(data))
   } else{data = data}
 
   if(pvclust == T & distmethod == "gower"){
