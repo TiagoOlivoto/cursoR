@@ -25,7 +25,7 @@ Função para estimativa de distâncias em uma matriz de dupla entrada (genótipos e
  
   \item{alpha}{O nível de significancia para o agrupamento. Padrão é 0.95. Assim, grupos com p-valor > 0.95 são considerados significativos.}
  
-  \item{distmethod}{O método de distância a ser utilizado. Padrão é "euclidean". Outros métodos válidos são: "maximum", "manhattan", "canberra", "binary", "minkowski" ou "gower".
+  \item{distmethod}{O método de distância a ser utilizado. Padrão é "euclidean". Outros métodos válidos são: "pearson", "kendall", "spearman", "maximum", "manhattan", "canberra", "binary", "minkowski" ou "gower".
  }
  
    \item{clustmethod}{O método de agrupamento a ser utilizado. Padrão é "average" (= UPGMA). Outros métodos válidos são: "ward.D", "ward.D2", "single", "complete", "mcquitty" (= WPGMA), "median" (= WPGMC) ou "centroid" (= UPGMC).
