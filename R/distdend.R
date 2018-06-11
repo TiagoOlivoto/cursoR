@@ -22,8 +22,13 @@ distdend = function(data,
     } else{
   if (pvclust == TRUE){
     set.seed(123)
+    
+    if (distmethod == "pearson" | distmethod == "kendall" | distmethod == "spearman" ){
+      distmethod2 = "correlation"
+    } else{distmethod2 = distmethod}
+    
     dend = pvclust::pvclust(t(data),
-                            method.dist = distmethod,
+                            method.dist = distmethod2,
                             method.hclust = clustmethod,
                             nboot = nboot)
     
@@ -42,10 +47,12 @@ rownames(de) = rownames(datapc)
 colnames(de) = rownames(datapc)
 de = as.dist(de)
 } else{
-de = dist(data, method = distmethod, diag = T, upper = T)
+  
+de = factoextra::get_dist(data, method = distmethod, diag = T, upper = T)
 }
 mat = as.matrix(de)
 mat = as.data.frame(mat)
+
 hc = hclust(de, method = clustmethod)
 out  = factoextra::fviz_dend(hc,
                              main = "",
