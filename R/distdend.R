@@ -1,6 +1,7 @@
 distdend = function(data,
                     scale = FALSE,
                     results = TRUE,
+                    dendrogram = TRUE,
                     pvclust = FALSE,
                     nboot = 1000,
                     alpha = 0.95,
@@ -71,13 +72,24 @@ if (pvclust == TRUE){
 }
 
 if (results == TRUE){
+  if(dendrogram == TRUE){
   return(list(graphic = out,
               distances = mat,
               cophenetic = cof,
               pval = pval,
               dend = dend))
+  } else{
+    return(list(distances = mat,
+                cophenetic = cof,
+                pval = pval,
+                dend = dend))
+  }
 } else{
+  if(dendrogram == TRUE){
   return(out)
+  } else{
+    stop("Argumentos inválidos. Ao menos um dos argumentos (dendrogram ou results) precisa ser 'TRUE'. Nada foi gerado.")
+  }
 }
 
  }
