@@ -5,7 +5,7 @@ distdend = function(data,
                     nboot = 1000,
                     alpha = 0.95,
                     distmethod = "euclidean",
-                    clustmethod = "ward.D2",
+                    clustmethod = "average",
                     type = "rectangle",
                     nclust = NULL,
                     ...){
@@ -52,6 +52,9 @@ out  = factoextra::fviz_dend(hc,
                              k = nclust, 
                              type = type,
                              ...)
+d2=cophenetic(hc)
+cof = cor(d2, de)
+
 if (pvclust == TRUE){
   pval = pval
   dend = dend
@@ -63,6 +66,7 @@ if (pvclust == TRUE){
 if (results == TRUE){
   return(list(graphic = out,
               distances = mat,
+              cophenetic = cof,
               pval = pval,
               dend = dend))
 } else{
