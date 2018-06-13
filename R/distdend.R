@@ -1,4 +1,4 @@
-distdend = function(data,
+distdend2 = function(data,
                     scale = FALSE,
                     selvar = FALSE,
                     results = TRUE,
@@ -147,7 +147,11 @@ de = factoextra::get_dist(data, method = distmethod, diag = T, upper = T)
 mat = as.matrix(de)
 mat = as.data.frame(mat)
 
+if(is.null(nclust)==F){
 hc = factoextra::hcut(de, hc_method = clustmethod, k = nclust)
+} else{
+hc = hclust(de, method = clustmethod)
+}
 out  = factoextra::fviz_dend(hc,
                              main = "",
                              k = nclust, 
@@ -157,10 +161,9 @@ d2 = cophenetic(hc)
 cof = cor(d2, de)
 k = 1.25
 pcorte = mean(hc$height) + k * sd(hc$height)
-ctree = cutree(hc,nclust)
-
 
 if(is.null(nclust)==F){
+ctree = cutree(hc,nclust)
 cl.stats = fpc::cluster.stats(d = hc, clustering = ctree)
 cl.names = list()
 cl.code = 0
