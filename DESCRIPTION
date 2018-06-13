@@ -15,7 +15,9 @@ Imports: corrplot,
          plyr,
          MASS,
          FWDselect,
-         diagram
+         diagram,
+         factoextra,
+         ade4
 RoxygenNote: 6.0.1
 
 
