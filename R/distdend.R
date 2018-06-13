@@ -13,6 +13,9 @@ distdend = function(data,
                     nclust = NULL,
                     ...){
 
+  if (scale == TRUE & selvar == TRUE){
+    stop("O algorítmo de seleção de variáveis só pode ser executado com os dados não padronizados. Selecione 'scale = FALSE'.")
+  }
   if (scale == TRUE){
     data = data.frame(scale(data))
   } else{data = data}
@@ -28,7 +31,7 @@ distdend = function(data,
     for (i in 1:n){
       de = factoextra::get_dist(data, method = distmethod, diag = T, upper = T)
       hc = hclust(de, method = clustmethod)
-      d2=cophenetic(hc)
+      d2 = cophenetic(hc)
       cof = cor(d2, de)
       mant = ade4::mantel.rtest(de, dein, nrepet = 1000)
       mantc = mant$obs
@@ -53,8 +56,6 @@ distdend = function(data,
                      pvmant = mantp)
       namesv = names(data[names])
       data2 = data.frame(data[-(match(c(namesv), names(data)))])
-      
-      
       data = data2
       ModelEstimates[[paste("Model",modelcode)]] = Results
       
@@ -146,15 +147,31 @@ de = factoextra::get_dist(data, method = distmethod, diag = T, upper = T)
 mat = as.matrix(de)
 mat = as.data.frame(mat)
 
-hc = hclust(de, method = clustmethod)
+hc = factoextra::hcut(de, hc_method = clustmethod, k = nclust)
 out  = factoextra::fviz_dend(hc,
                              main = "",
                              k = nclust, 
                              type = type,
                              ...)
-d2=cophenetic(hc)
+d2 = cophenetic(hc)
 cof = cor(d2, de)
+k = 1.25
+pcorte = mean(hc$height) + k * sd(hc$height)
+ctree = cutree(hc,nclust)
 
+
+if(is.null(nclust)==F){
+cl.stats = fpc::cluster.stats(d = hc, clustering = ctree)
+cl.names = list()
+cl.code = 0
+for(k in 1:nclust){
+  res = rownames(data)[ctree == k]
+  cl.code = cl.code + 1
+  cl.names[[paste("Cluster",cl.code)]] = res
+}
+} else {
+  cl.stats = NULL
+  cl.names = NULL}
 if (pvclust == TRUE){
   pval = pval
   dend = dend
@@ -171,27 +188,39 @@ if (results == TRUE){
               cofgrap = cofgrap,
               graphic = out,
               distances = mat,
+              cl.stats = cl.stats,
+              cl.names = cl.names,
               cophenetic = cof,
+              cut = pcorte,
               pval = pval,
               dend = dend))
    }else{
      return(list(graphic = out,
-                     distances = mat,
-                     cophenetic = cof,
-                     pval = pval,
-                     dend = dend))
+                 distances = mat,
+                 cl.stats = cl.stats,
+                 cl.names = cl.names,
+                 cophenetic = cof,
+                 cut = pcorte,
+                 pval = pval,
+                 dend = dend))
      }
   } else{
     if(selvar ==TRUE){
       return(list(statistics = statistics,
                   models = ModelEstimates,
                   distances = mat,
+                  cl.stats = cl.stats,
+                  cl.names = cl.names,
                   cophenetic = cof,
+                  cut = pcorte,
                   pval = pval,
                   dend = dend))
     }else{
       return(list(distances = mat,
+                  cl.stats = cl.stats,
+                  cl.names = cl.names,
                   cophenetic = cof,
+                  cut = pcorte,
                   pval = pval,
                   dend = dend))
     }
