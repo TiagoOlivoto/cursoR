@@ -7,6 +7,8 @@ import(plyr)
 import(MASS)
 import(FWDselect)
 import(diagram)
+import(factoextra)
+import(ade4)
 importFrom("grDevices", "dev.off", "pdf", "tiff")
 importFrom("graphics", "par")
 importFrom("stats", "as.formula", "cor", "cor.test", "lm", "pf",
