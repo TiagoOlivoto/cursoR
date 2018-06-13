@@ -1,4 +1,4 @@
-distdend2 = function(data,
+distdend = function(data,
                     scale = FALSE,
                     selvar = FALSE,
                     results = TRUE,
