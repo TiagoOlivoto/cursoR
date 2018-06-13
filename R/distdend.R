@@ -1,5 +1,5 @@
 distdend = function(data,
-                    scale = TRUE,
+                    scale = FALSE,
                     selvar = FALSE,
                     results = TRUE,
                     dendrogram = TRUE,
