@@ -1,8 +1,10 @@
 distdend = function(data,
-                    scale = FALSE,
+                    scale = TRUE,
+                    selvar = FALSE,
                     results = TRUE,
                     dendrogram = TRUE,
                     pvclust = FALSE,
+                    verbose = TRUE,
                     nboot = 1000,
                     alpha = 0.95,
                     distmethod = "euclidean",
@@ -10,11 +12,101 @@ distdend = function(data,
                     type = "rectangle",
                     nclust = NULL,
                     ...){
-  
+
   if (scale == TRUE){
     data = data.frame(scale(data))
   } else{data = data}
-
+  
+  if (selvar == TRUE){
+    n = (ncol(data)-1)
+    statistics = data.frame(matrix(nrow = n, ncol = 6))
+    ModelEstimates = list()
+    modelcode = 1
+    namesv = "-"
+    original = data
+    dein = factoextra::get_dist(original, method = distmethod, diag = T, upper = T)
+    for (i in 1:n){
+      de = factoextra::get_dist(data, method = distmethod, diag = T, upper = T)
+      hc = hclust(de, method = clustmethod)
+      d2=cophenetic(hc)
+      cof = cor(d2, de)
+      mant = ade4::mantel.rtest(de, dein, nrepet = 1000)
+      mantc = mant$obs
+      mantp = mant$pvalue
+      evect = data.frame(t(prcomp(data)$rotation))
+      var = abs(evect)[nrow(evect),]
+      names = apply(var, 1, function(x) which(x == max(x)))
+      npred = ncol(data)
+      statistics[i,1] = paste("Model",modelcode)
+      statistics[i,2] = namesv
+      statistics[i,3] = cof
+      statistics[i,4] = npred
+      statistics[i,5] = mantc
+      statistics[i,6] = mantp
+      mat = as.matrix(de)
+      mat = as.data.frame(mat)
+      Results = list(nvars = npred,
+                     excluded = namesv,
+                     namevars = names(data),
+                     distance = mat,
+                     cormantel = mantc,
+                     pvmant = mantp)
+      namesv = names(data[names])
+      data2 = data.frame(data[-(match(c(namesv), names(data)))])
+      
+      
+      data = data2
+      ModelEstimates[[paste("Model",modelcode)]] = Results
+      
+      names(statistics) = c("Model", "excluded", "cophenetic", "remaining", "cormantel", "pvmantel")
+      if(verbose == TRUE){
+      cat(paste("Calculating model ",modelcode, " with ", npred,
+                " variables.", "'",namesv,"'", "excluded in this step (",
+                round(modelcode/n*100,1),"%).", "\n"))
+      }
+      modelcode = modelcode + 1
+      
+    }
+    cat("Done!","\n")
+    cat("\n\n")
+    cat("--------------------------------------------------------------------------","\n")
+    cat("Summary of the adjusted models","\n")
+    cat("--------------------------------------------------------------------------","\n")   
+    print(statistics)
+    cat("--------------------------------------------------------------------------")
+    
+    cofgrap = ggplot(statistics, aes(x = remaining, y = cophenetic))+
+      geom_point(size = 3)+
+      theme_bw()+
+      geom_line(size = 1)+
+      theme(axis.ticks.length = unit(.2, "cm"),
+            axis.text = element_text(size = 12, colour = "black"),
+            axis.title = element_text(size = 12, colour = "black"),
+            axis.ticks = element_line(colour = "black"),
+            plot.margin = margin(0.5, 0.5, 0.2, 0.6, "cm"),
+            axis.title.y = element_text(margin = margin(r=16)),
+            legend.title = element_blank(),
+            legend.text = element_text(size=12),
+            panel.border = element_rect(colour = "black", fill=NA, size=1),
+            panel.grid.major.x = element_blank(),
+            panel.grid.major.y = element_blank(),
+            panel.grid.minor.x = element_blank(),
+            panel.grid.minor.y = element_blank())+
+      labs(x = "Número de variáveis na distância", y = "Correlação cofenética")
+    
+    model = statistics$Model[which.max(statistics$cophenetic)]
+    predvar = ModelEstimates[[model]]$namevars
+    data = data.frame(original[(match(c(predvar), names(original)))])
+    cat("\n\n")
+    cat("Suggested variables to be used in the analysis","\n")
+    cat("--------------------------------------------------------------------------","\n")
+    cat("The distance were calculated based on the variables in ", model,".", "\n",
+        "The variables included in this model were...","\n",
+        predvar,"\n")
+    cat("--------------------------------------------------------------------------")
+    
+     } else{data = data}
+  
   if(pvclust == T & distmethod == "gower"){
     stop("o procedimento pvclust não pode ser aplicado quando o método de distância é gower")
   } else{  
@@ -73,16 +165,36 @@ if (pvclust == TRUE){
 
 if (results == TRUE){
   if(dendrogram == TRUE){
-  return(list(graphic = out,
+   if(selvar ==TRUE){
+  return(list(statistics = statistics,
+              models = ModelEstimates,
+              cofgrap = cofgrap,
+              graphic = out,
               distances = mat,
               cophenetic = cof,
               pval = pval,
               dend = dend))
+   }else{
+     return(list(graphic = out,
+                     distances = mat,
+                     cophenetic = cof,
+                     pval = pval,
+                     dend = dend))
+     }
   } else{
-    return(list(distances = mat,
-                cophenetic = cof,
-                pval = pval,
-                dend = dend))
+    if(selvar ==TRUE){
+      return(list(statistics = statistics,
+                  models = ModelEstimates,
+                  distances = mat,
+                  cophenetic = cof,
+                  pval = pval,
+                  dend = dend))
+    }else{
+      return(list(distances = mat,
+                  cophenetic = cof,
+                  pval = pval,
+                  dend = dend))
+    }
   }
 } else{
   if(dendrogram == TRUE){
