@@ -13,11 +13,10 @@ Transforma uma variável ou um vetor de variáveis em novas variáveis. Por exemplo
  \item{data}{O conjunto de dados.}
 
  \item{var}{A variável (var = "a"), ou um vetor de variáveis (var = c("a", "b") a ser transformado.}
- }
  
  \item{type}{O tipo de variável desejado Ex. \code{as.numerical}, \code{as.factor}, \code{as.logical}.}
- }
  
+ }
 \author{Tiago Olivoto \email{tiagoolivoto@gmail.com}}
 
 \examples{

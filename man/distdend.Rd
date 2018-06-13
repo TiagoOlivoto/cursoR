@@ -2,7 +2,7 @@
 \alias{distdend}
 \title{Análise de agrupamento com estimativas de distâncias, seleção de variáveis e confecção de dendrogramas}
 \usage{
-pca(data, scale = FALSE, selvar = FALSE, results = TRUE,
+distdend(data, scale = FALSE, selvar = FALSE, results = TRUE,
 dendrogram = TRUE, pvclust = FALSE, verbose = TRUE,
 nboot = 1000, alpha = 0.95, distmethod = "euclidean", 
 clustmethod = "average", type = "rectangle", nclust = NULL, ...)
