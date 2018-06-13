@@ -17,7 +17,10 @@ Imports: corrplot,
          FWDselect,
          diagram,
          factoextra,
-         ade4
+         ade4,
+         fpc,
+         pvclust,
+         StatMatch
 RoxygenNote: 6.0.1
 
 
