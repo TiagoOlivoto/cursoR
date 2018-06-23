@@ -12,7 +12,7 @@ CIcorr.mat = function(data){
   vector =  data.frame(t(corr)[lower.tri(corr,diag=F)])
   names(vector) = "r"
   Corconf$Corr = vector$r
-  Corconf =  plyr::mutate(Corconf,
+  Corconf =  dplyr::mutate(Corconf,
                           CI = (0.45304^abs(Corr))*2.25152*(Nlinha^-0.50089),
                           LL = Corr - CI,
                           UL = Corr + CI)
