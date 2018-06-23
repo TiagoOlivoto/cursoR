@@ -1,15 +1,15 @@
-\name{diagram}
-\alias{diagram}
+\name{path.diagram}
+\alias{path.diagram}
 \title{Diagrama de trilha com efeitos diretos e indiretos}
 
 \usage{
-diagram(model, digits = 3, symetrical = TRUE, curve = 0, pos = NULL,
+path.diagram(x, digits = 3, symetrical = TRUE, curve = 0, pos = NULL,
         diag = TRUE,relsize = 1, dtext = 0.15, lwd = 1, lcol = "black",
         box.lwd = 0.5, cex.txt = 0.8, box.type = "hexa", box.size = 0.08,
         box.prop = 0.5, box.col = "gray90", arr.type = "curved", arr.pos = 0.4,
         arr.lwd = 1, arr.col = NULL, arr.length = 0.4, arr.width = 0.2,
         export = FALSE, file.type = "pdf", file.name = NULL, width = 8,
-        height = 7, resolution = 300)
+        height = 7, resolution = 300, ...)
 }
 
 \description{
@@ -19,7 +19,7 @@ Confecciona um diagrama de trilha dos efeitos diretos e indiretos com base em um
 
 \arguments{
 
- \item{model}{O objeto \code{Coeff} criado pela função \code{path.coeff}, ou qualquer matrix simétrica}
+ \item{x}{O objeto \code{Coeff} criado pela função \code{path.coeff}, ou qualquer matrix quadrada}
  
  \item{digits}{O número de dígitos significativos a ser plotado.}
  
@@ -75,9 +75,11 @@ Confecciona um diagrama de trilha dos efeitos diretos e indiretos com base em um
   
  \item{resolution}{A resolução da imagem. Argumento válido se \code{file.type = "tiff"} é declarado. Padrão é \code{300} (300 dpi)}
 
+\item{...}{Outros argumentos importados das funções \code{plotmat()} do pacote diagram.
  }
  
- \details{Esta função calcula o tamanho da amostra requerido para estimar o coeficiente de correlação de Pearson com uma semi-amplitude do intervalo de confiança pré-definido. A estimativa é baseada no método não paramétrico proposto por \cite{Olivoto et al. (2018)}}
+ }
+ 
 
 \author{Tiago Olivoto \email{tiagoolivoto@gmail.com}}
 

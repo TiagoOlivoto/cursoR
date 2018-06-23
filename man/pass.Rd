@@ -22,9 +22,9 @@ Transforma uma variável ou um vetor de variáveis em novas variáveis. Por exemplo
 \examples{
 x = as.factor(rnorm(30, 30, 2))
 y = as.character(sample(LETTERS, 30, replace=TRUE))
-z = as.numeric(sample(c(0,1), 30, replace = T))
+z = as.numeric(sample(c(0,1), 30, replace = TRUE))
 data = data.frame(cbind(x, y, z))
 
-data2 = pass(data = data, var = "x", type = as.numerical())
+data2 = pass(data = data, var = "x", type = as.numeric)
 
 }
