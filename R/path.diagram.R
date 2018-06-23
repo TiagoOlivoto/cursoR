@@ -28,7 +28,7 @@ path.diagram = function(x,
                         resolution = 300,
                         ...){
 
-class = class(model)
+class = class(x)
 
 if (class == "matrix"){
   
@@ -50,11 +50,11 @@ if (class == "matrix"){
   
   
 } else{
-  coeff = model$Coefficients
+  coeff = x$Coefficients
   coeff = format(coeff, digits = digits)
   coeff = as.matrix(coeff)
   names = names(coeff)
-  resp = paste0(model$Response, " as dependent variable")
+  resp = paste0(x$Response, " as dependent variable")
 }
 
 
