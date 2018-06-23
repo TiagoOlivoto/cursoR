@@ -5,14 +5,13 @@ Version: 1.0.1
 Author: Tiago Olivoto
 Maintainer: Tiago Olivoto <tiagoolivoto@gmail.com>
 Description: Pacote criado para o curso R realizado pelo grupo Experimentação da UFSM-SM. As funções utilizadas no curso são disponibilizadas.
-Depends: R (>= 3.4.2)
+Depends: R (>= 3.5.0)
 License: GPL (>=3)
 Encoding: ISO-8859-1
 LazyData: true
 Imports: corrplot,
          ggplot2,
          GGally,
-         plyr,
          MASS,
          FWDselect,
          diagram,
@@ -20,7 +19,10 @@ Imports: corrplot,
          ade4,
          fpc,
          pvclust,
-         StatMatch
+         StatMatch,
+         dplyr,
+         psych,
+         stability
 RoxygenNote: 6.0.1
 
 
