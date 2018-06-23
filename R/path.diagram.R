@@ -1,4 +1,4 @@
-diagram = function(model,
+path.diagram = function(x,
                         digits = 3,
                         symetrical = TRUE,
                         curve = 0,
@@ -25,7 +25,8 @@ diagram = function(model,
                         file.name = NULL,
                         width = 8,
                         height = 7,
-                        resolution = 300){
+                        resolution = 300,
+                        ...){
 
 class = class(model)
 
@@ -89,7 +90,8 @@ if (export  ==  F|FALSE) {
                    self.cex = 0.55,
                    self.shifty=0.05,
                    mx = -0.02,
-                   my = -0.02)
+                   my = -0.02,
+                   ...)
 } else {
   
   par(mar=c(0,0,1,0))
@@ -119,7 +121,8 @@ if (export  ==  F|FALSE) {
                    self.cex = 0.55,
                    self.shifty=0.05,
                    mx = -0.02,
-                   my = -0.02)
+                   my = -0.02,
+                   ...)
   
   if (file.type == "pdf"){
     if (is.null(file.name)){
@@ -153,7 +156,8 @@ if (export  ==  F|FALSE) {
                      self.cex = 0.55,
                      self.shifty=0.05,
                      mx = -0.02,
-                     my = -0.02)
+                     my = -0.02,
+                     ...)
     dev.off()
   }
 
@@ -189,7 +193,8 @@ if (file.type == "tiff"){
                    self.cex = 0.55,
                    self.shifty=0.05,
                    mx = -0.02,
-                   my = -0.02)
+                   my = -0.02,
+                   ...)
   dev.off()
 }
 }
