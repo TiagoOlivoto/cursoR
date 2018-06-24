@@ -23,6 +23,8 @@ Retorna diversas informações baseadas em um conjunto de dados com a estrutura GE
  }
  
 \value{
+\item{individual}{Uma lista com os resultados da análise de variância individual de cada ambiente. No dataframe \code{individual} são são calculados os seguintes valores: \code{ENV}, , o código do ambiente, \code{Mean}, a média do ambiente, \code{MSblock}, o quadrado médio do bloco, \code{MSgen}, o quadrado médio do genótipo, \code{MSres}, o quadrado médio do erro, \code{Fcal(Blo)} e \code{Fcal(Gen)} são o F faculado para o bloco e genótipo, com as respectivas probabilidades [ \code{Pr>F(Blo)} e \code{Fcal(Gen)}], \code{CV} é o coeficiente de variação, \code{h2} é a herdabilidade média, \code{AS} é a acurácia seletiva e \code{R2} é o coeficiente de determinação }
+
 \item{ge_means}{Uma lista com os seguintes data frames: \code{ge_means}, contendo as médias dos genótipos nos ambientes; \code{ge_effects}, os efeitos da interação genótipo vs ambiente e \code{gge_effects}, os efeitos dos genótipos + interação genótipo vs ambiente}
 
 \item{anovaconj}{A análise de variância conjunta considerando o delineamento de blocos completos casualizados}
