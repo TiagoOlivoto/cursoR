@@ -5,7 +5,7 @@ ge_stats = function (data,
                      rep) {
   
   nam = cbind(c(env, gen, rep, resp))
-  data = data.frame(Pasta1[(match(c(nam), names(Pasta1)))])
+  data = data.frame(data[(match(c(nam), names(data)))])
   names(data) = c("Env", "Gen", "Rep", "Yield")
   for (n in c(1:3)) {
     data[,n] = as.factor(data[,n])
