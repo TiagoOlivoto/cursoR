@@ -3,7 +3,7 @@ ge_stats = function (data,
                      gen,
                      env,
                      rep) {
-  
+
   nam = cbind(c(env, gen, rep, resp))
   data = data.frame(data[(match(c(nam), names(data)))])
   names(data) = c("Env", "Gen", "Rep", "Yield")
@@ -85,6 +85,7 @@ ge_stats = function (data,
                                           Ecov.perc = Ecov/sum(Ecov)*100)
 
   ########## ER ######
+  library(dplyr)
   model1 <- lm(Yield ~ Gen + Env + Env/Rep + 
                  Env * Gen, data = data)
   modav <- anova(model1)
@@ -122,7 +123,7 @@ p = ggplot(iamb2, aes(x = IndAmb, y = Yield))+
                    panel.border = element_rect(colour = "black", fill=NA, size=1),
                    panel.grid.major.x = element_blank(), panel.grid.major.y = element_blank(),
                    panel.grid.minor.x = element_blank(), panel.grid.minor.y = element_blank())
-  p2 = suppressMessages(ggplotly(p))
+  p2 = suppressMessages(plotly::ggplotly(p))
   
   matx <- myAgg$Yield
   myAgg$Gen
