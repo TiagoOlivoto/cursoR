@@ -85,6 +85,10 @@ ge_stats = function (data,
       .gen  = Gen,
       .env  = Env))
   
+  stab_meas$StabMeasures$Ecov = stab_meas$StabMeasures$Ecov * NR
+  stab_meas$StabMeasures = dplyr::mutate(stab_meas$StabMeasures, 
+                                          Ecov.perc = Ecov/sum(Ecov)*100)
+  
   stab_reg = 
     suppressWarnings(stability::stab_reg(
       .data  = data,
