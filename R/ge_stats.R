@@ -85,7 +85,6 @@ ge_stats = function (data,
                                           Ecov.perc = Ecov/sum(Ecov)*100)
 
   ########## ER ######
-  library(dplyr)
   model1 <- lm(Yield ~ Gen + Env + Env/Rep + 
                  Env * Gen, data = data)
   modav <- anova(model1)
@@ -104,14 +103,11 @@ ge_stats = function (data,
   iamb2 = suppressMessages(dplyr::mutate(iamb2, 
                         IndAmb = dplyr::left_join(iamb2, iamb %>% select(Env, IndAmb))$IndAmb))
   
-  library(ggplot2)
-  library(plotly)
-  
-p = ggplot(iamb2, aes(x = IndAmb, y = Yield))+
-    geom_point(aes(colour = factor(Gen)), size = 1.5)+
+p = ggplot2::ggplot(iamb2, aes(x = IndAmb, y = Yield))+
+  ggplot2::geom_point(aes(colour = factor(Gen)), size = 1.5)+
     geom_smooth(aes(colour = factor(Gen)), method = "lm", se = FALSE)+
-    theme_bw()+
-    labs(x = "Índice ambiental", y = "Produtividade de grãos")+
+  ggplot2::theme_bw()+
+  ggplot2::labs(x = "Índice ambiental", y = "Produtividade de grãos")+
     ggplot2::theme(axis.ticks.length = unit(.2, "cm"),
                    axis.text = element_text(size = 12, colour = "black"),
                    axis.title = element_text(size = 12, colour = "black"),
