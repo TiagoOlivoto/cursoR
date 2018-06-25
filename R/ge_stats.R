@@ -193,7 +193,7 @@ p = ggplot2::ggplot(iamb2, aes(x = IndAmb, y = Yield))+
               ge_means = means,
               anovaconj = anovaconj,
               ER = ER,
-              stab_meas = stab_meas,
+              stab_meas = data.frame(stab_meas),
               iamb = iamb2,
               plot = p,
               iterplot = p2))
