@@ -76,13 +76,13 @@ ge_stats = function (data,
       .data  = data,
       .y = Yield,
       .gen  = Gen,
-      .env  = Env))
+      .env  = Env))[["StabMeasures"]]
   
-  stab_meas$StabMeasures$GenSS = stab_meas$StabMeasures$GenSS * NR
-  stab_meas$StabMeasures$Var = stab_meas$StabMeasures$Var * NR
-  stab_meas$StabMeasures$Ecov = stab_meas$StabMeasures$Ecov * NR
-  stab_meas$StabMeasures = dplyr::mutate(stab_meas$StabMeasures, 
-                                          Ecov.perc = Ecov/sum(Ecov)*100)
+  stab_meas$GenSS = stab_meas$GenSS * NR
+  stab_meas$Var = stab_meas$Var * NR
+  stab_meas$Ecov = stab_meas$Ecov * NR
+  stab_meas = dplyr::mutate(stab_meas,
+                            Ecov.perc = Ecov/sum(Ecov)*100)
 
   ########## ER ######
   model1 <- lm(Yield ~ Gen + Env + Env/Rep + 
