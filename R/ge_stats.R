@@ -187,7 +187,7 @@ p = ggplot2::ggplot(iamb2, aes(x = IndAmb, y = Yield))+
   ERREGR$sdij = outdat$sdij
   
   ER = list(ANOVA = anovadf,
-            Regression = ERREGR)
+            Regression = data.frame(ERREGR))
   
   return(list(individual = individual,
               ge_means = means,
