@@ -95,8 +95,8 @@ p = ggplot2::ggplot(data2, aes(x = x, y = y, colour = factors)) +
 p = p + p_smooth +
   ggplot2::theme_bw()+
   ggplot2::theme(axis.ticks.length = unit(.2, "cm"),
-        axis.text = element_text(size = cex, family = fontfam),
-        axis.title = element_text(size = cex,  family = fontfam),
+        axis.text = element_text(size = cex, family = fontfam, colour = "black"),
+        axis.title = element_text(size = cex,  family = fontfam, colour = "black"),
         axis.ticks = element_line(colour = "black"),
         plot.margin = margin(0.2, 0.2, 0.2, 0.2, "cm"),
         legend.title = element_blank(),
