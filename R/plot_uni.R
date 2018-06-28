@@ -22,16 +22,16 @@ if(col == TRUE){
   data2 = cbind(x, y)
   names(data2) = c("x", "y")
 
-  if(fit[i] == 1){
+  if(fit == 1){
     formula = as.formula("y ~ x")
   }
-  if(fit[i] == 2){
+  if(fit == 2){
     formula = as.formula("y ~ poly(x, 2)")
   }
-  if(fit[i] == 3){
+  if(fit == 3){
     formula = as.formula("y ~ poly(x, 3)")
   }
-  if(fit[i] == 4){
+  if(fit == 4){
     formula = as.formula("y ~ poly(x, 4)")
   }
 
