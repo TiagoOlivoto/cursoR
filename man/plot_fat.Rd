@@ -1,10 +1,10 @@
 \name{plot_fat}
 \alias{plot_fat}
-\title{Gráfico para ajuste de curvas em experimentos fatoriais}
+\title{Gráfico para ajuste de curvas em experimentos bifatoriais}
 \usage{
 plot_fat(data, x, y, group, fit, level = 0.95, xlab, ylab,
          legend.position = "bottom", grid = FALSE, col = TRUE,
-         alpha = 0.2, size.shape = 1.5, size.line = 1, cex = 12)
+         alpha = 0.2, size.shape = 1.5, size.line = 1, cex = 12, fontfam = "sans")
 }
 \description{
 Confecciona gráficos personalizados para plotagem de curvas em experimentos fatoriais quando um fator é quantitatito e outro é qualitativo.
