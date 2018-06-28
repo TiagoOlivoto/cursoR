@@ -1,41 +1,26 @@
 
-plot_fat = function(data,
+plot_uni = function(data,
                        x,
                        y,
-                       group,
                        fit,
                        level = 0.95,
                        xlab = NULL,
                        ylab = NULL,
-                       legend.position = "bottom",
-                       grid = FALSE,
-                       col = TRUE,
+                       col = "red",
                        alpha = 0.2,
                        size.shape = 1.5,
                        size.line = 1,
                        cex = 12,
                        fontfam = "sans"){
-  
   cl = match.call()
+if(col == TRUE){
+  stop(paste0("O argumento col = ", cl$col, " é inválido. Informe uma cor, ou FALSE para uma plotagem preto e branco"))
+}  
+  
   x = data[(match(c(x), names(data)))]
   y = data[(match(c(y), names(data)))]
-  group = data[(match(c(group), names(data)))]
-  names(group) = "factors"
-  if(is.factor(group$factors) == FALSE){
-    stop(paste0("A coluna ", cl$group, " não é um fator. Considere executar o seguinte comando:","\n",
-                cl$data, " = cursoR::pass(", cl$data , ", var = '", cl$group, "', type = as.factor)"))
-  }
-  
-  data2 = cbind(group, x, y)
-  names(data2) = c("factors", "x", "y")
-
-p_smooth = list()
-levels = levels(group$factors)
-
-for (i in 1:length(levels)){
-
-  levelname = levels[i]
-  mycond <- quote(group == levelname) 
+  data2 = cbind(x, y)
+  names(data2) = c("x", "y")
 
   if(fit[i] == 1){
     formula = as.formula("y ~ x")
@@ -51,30 +36,26 @@ for (i in 1:length(levels)){
   }
 
 if (col == FALSE){
-  linetype = i
-  p_smooth[[paste(levels[i])]] = ggplot2::stat_smooth(method = "lm",
+  linetype = 1
+  p_smooth = ggplot2::stat_smooth(method = "lm",
                                              formula = formula,
-                                             data = subset(data2, eval(mycond)),
+                                             data = data2,
                                              level = level,
-                                             linetype = linetype,
                                              alpha = alpha,
                                              col = "black",
                                              size = size.line)
 } else{
 linetype = 1
-p_smooth[[paste(levels[i])]] = ggplot2::stat_smooth(method = "lm",
+p_smooth = ggplot2::stat_smooth(method = "lm",
                                             formula = formula,
-                                            data = subset(data2, eval(mycond)),
+                                            data = data2,
                                             level = level,
-                                            linetype = linetype,
                                             alpha = alpha,
+                                            col = col,
                                             size = size.line)
 }
-}
 
-if(grid == TRUE){
-  legend.position = "none"
-} else{legend.position = legend.position}
+
 
 if (is.null(ylab) == T){
   ylab = cl$y
@@ -84,19 +65,20 @@ if (is.null(xlab) == T){
   xlab = cl$x
 }else {xlab = xlab}
 
-if (col == FALSE){
-p = ggplot2::ggplot(data2, aes(x = x, y = y)) +
-    ggplot2::geom_point(aes(shape = factors), size = size.shape)
-} else{
-p = ggplot2::ggplot(data2, aes(x = x, y = y, colour = factors)) + 
-    ggplot2::geom_point(size = size.shape)
+
+  if (col == FALSE){
+    p = ggplot2::ggplot(data2, aes(x = x, y = y)) +
+      ggplot2::geom_point(size = size.shape)
+  } else{
+    p = ggplot2::ggplot(data2, aes(x = x, y = y)) + 
+      ggplot2::geom_point(size = size.shape, col = col)
   }
 
 p = p + p_smooth +
   ggplot2::theme_bw()+
   ggplot2::theme(axis.ticks.length = unit(.2, "cm"),
-        axis.text = element_text(size = cex, family = fontfam),
-        axis.title = element_text(size = cex,  family = fontfam),
+        axis.text = element_text(size = cex, family = fontfam, colour = "black"),
+        axis.title = element_text(size = cex,  family = fontfam, colour = "black"),
         axis.ticks = element_line(colour = "black"),
         plot.margin = margin(0.2, 0.2, 0.2, 0.2, "cm"),
         legend.title = element_blank(),
@@ -107,9 +89,6 @@ p = p + p_smooth +
         panel.grid.minor.x = element_blank(), panel.grid.minor.y = element_blank())+
 ggplot2::labs(y = ylab, x = xlab)
 
-if (grid == TRUE){
-    p = p + ggplot2::facet_wrap(~factors, scales = "free")
-  } else{p = p}
   return(p)
 
 }
