@@ -82,7 +82,6 @@ p = p + p_smooth +
         axis.ticks = element_line(colour = "black"),
         plot.margin = margin(0.2, 0.2, 0.2, 0.2, "cm"),
         legend.title = element_blank(),
-        legend.position = legend.position,
         legend.text = element_text(size = cex, family = fontfam),
         panel.border = element_rect(colour = "black", fill=NA, size=1),
         panel.grid.major.x = element_blank(), panel.grid.major.y = element_blank(),
