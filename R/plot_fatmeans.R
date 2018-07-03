@@ -104,7 +104,7 @@ p = p + scale_fill_grey(start = 0, end = .9)
   print(datac)
   
   if (export  ==  F|FALSE) {
-    plot(p)
+    return(p)
   } else
     
     if(file.type == "pdf"){
@@ -124,7 +124,5 @@ p = p + scale_fill_grey(start = 0, end = .9)
     plot(p)
     dev.off()
   }
-  
-  return(p)
   
 }
