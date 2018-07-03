@@ -2,7 +2,7 @@
 \alias{plot_fatcurves}
 \title{Gráfico para ajuste de curvas em experimentos bifatoriais}
 \usage{
-plot_fat(data, x, y, group, fit, level = 0.95, xlab = NULL, ylab = NULL,
+plot_fatcurves(data, x, y, group, fit, level = 0.95, xlab = NULL, ylab = NULL,
          export = FALSE, file.type = "pdf", file.name = NULL, width = 6,
          height = 6, resolution = 300, legend.position = "bottom", 
          grid = FALSE, col = TRUE, alpha = 0.2, size.shape = 1.5,

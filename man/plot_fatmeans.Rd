@@ -1,6 +1,6 @@
-\name{plot_fatcurves}
-\alias{plot_fatcurves}
-\title{Gráfico para ajuste de curvas em experimentos bifatoriais}
+\name{plot_means}
+\alias{plot_means}
+\title{Gráficos de barras em experimentos bifatoriais}
 \usage{
 plot_fat(data,  measurevar, groupvars = NULL, errorbar = "se",
         level = 0.95, invert = FALSE, col = TRUE, xlab = NULL, ylab = NULL,
@@ -9,7 +9,7 @@ plot_fat(data,  measurevar, groupvars = NULL, errorbar = "se",
          fontfam = "sans", legend.position = "bottom", na.rm=FALSE)
 }
 \description{
-Confecciona gráficos personalizados para plotagem de curvas em experimentos fatoriais quando um fator é quantitatito e outro é qualitativo.
+Confecciona gráficos de barra personalizados para plotagem para plotagem das médias em experimentos do tipo bifatoriais. Barras de erro também podem ser inclidas.
 
 }
 

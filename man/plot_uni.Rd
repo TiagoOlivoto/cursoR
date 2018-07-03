@@ -4,7 +4,7 @@
 \usage{
 plot_uni(data, x, y, fit, level = 0.95, xlab = NULL, ylab = NULL,
          export = FALSE, file.type = "pdf", file.name = NULL, width = 6,
-         height = 6, resolution = 300, col = FALSE, alpha = 0.2, 
+         height = 6, resolution = 300, col = "red", alpha = 0.2, 
          size.shape = 1.5, size.line = 1, cex = 12, fontfam = "sans")
 }
 \description{
