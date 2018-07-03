@@ -125,7 +125,6 @@ p = p + scale_fill_grey(start = 0, end = .9)
     dev.off()
   }
   
-  return(list(p = p,
-              cl = cl))
+  return(p)
   
 }
