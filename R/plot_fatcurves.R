@@ -164,7 +164,7 @@ if (grid == TRUE){
 } else{p = p}
 
 if (export  ==  F|FALSE) {
-  plot(p)
+  return(p)
 } else
   
   if(file.type == "pdf"){
