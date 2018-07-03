@@ -23,7 +23,7 @@ Confecciona gráficos personalizados para plotagem de curvas em experimentos fato
 
 \item{group}{A coluna com os níveis do fator qualitativo.}
 
-\item{fit}{Um vetor numérico de comprimento = número de níveis do fator qualitativo. O número representa o grau do polinômio a ser ajustado, assim, 1 = linear, 2 = quadratico, 3 = cúbico e 4 = quarto grau. Este último é o maior grau ajustado.}
+\item{fit}{Um número ou vetor numérico de comprimento = número de níveis do fator qualitativo. O número representa o grau do polinômio a ser ajustado, assim, 1 = linear, 2 = quadratico, 3 = cúbico e 4 = quarto grau. Este último é o maior grau ajustado. Se for um vetor, uma regressão de grau correspondente a cada valor informado será ajustada. Se numérico, uma única regressão é ajustada, de acordo com o grau informado}
 
 \item{level}{O nível de significância para a banda de confiança, padrão é 0.95.}
 
