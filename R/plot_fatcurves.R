@@ -22,6 +22,15 @@ plot_fatcurves = function(data,
                     cex = 12,
                     fontfam = "sans"){
   
+
+  if(length(fit)==1 & grid == TRUE){
+    stop("Argumentos inválidos. Se voce declarar somente um valor no argumento 'fit' não é possivel confeccionar um gráfico para cada nível do fator.")
+  }
+  
+  if(max(fit)>=5){
+    stop("Argumentos inválidos. O máximo grau de polinômio ajustavel é 4.")
+  }
+  
   cl = match.call()
   x = data[(match(c(x), names(data)))]
   y = data[(match(c(y), names(data)))]
@@ -38,6 +47,7 @@ plot_fatcurves = function(data,
 p_smooth = list()
 levels = levels(group$factors)
 
+if (length(fit)>1){
 for (i in 1:length(levels)){
 
   levelname = levels[i]
@@ -77,6 +87,38 @@ p_smooth[[paste(levels[i])]] = ggplot2::stat_smooth(method = "lm",
                                             size = size.line)
 }
 }
+} else{
+  if(fit == 1){
+    formula = as.formula("y ~ x")
+  }
+  if(fit == 2){
+    formula = as.formula("y ~ poly(x, 2)")
+  }
+  if(fit == 3){
+    formula = as.formula("y ~ poly(x, 3)")
+  }
+  if(fit == 4){
+    formula = as.formula("y ~ poly(x, 4)")
+  }
+  
+  if (col == TRUE){
+    p_smooth = ggplot2::stat_smooth(method = "lm",
+                                    formula = formula,
+                                    data = data2,
+                                    level = level,
+                                    linetype = 1,
+                                    size = size.line)
+  } else{
+    
+    p_smooth = ggplot2::stat_smooth(method = "lm",
+                                    formula = formula,
+                                    data = data2,
+                                    level = level,
+                                    linetype = 1,
+                                    col = "black",
+                                    size = size.line)    
+  }
+}
 
 if(grid == TRUE){
   legend.position = "none"
@@ -94,10 +136,14 @@ if (col == FALSE){
 p = ggplot2::ggplot(data2, aes(x = x, y = y)) +
     ggplot2::geom_point(aes(shape = factors), size = size.shape)
 } else{
+  if (length(fit)>1){
 p = ggplot2::ggplot(data2, aes(x = x, y = y, colour = factors)) + 
-    ggplot2::geom_point(size = size.shape)
+    ggplot2::geom_point(aes(colour = factors), size = size.shape)
+  } else{
+    p = ggplot2::ggplot(data2, aes(x = x, y = y)) + 
+      ggplot2::geom_point(aes(colour = factors), size = size.shape)
   }
-
+}
 p = p + p_smooth +
   ggplot2::theme_bw()+
   ggplot2::theme(axis.ticks.length = unit(.2, "cm"),
