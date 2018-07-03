@@ -38,7 +38,7 @@ plot_fatmeans = function(data,
                  measurevar
   )
   
-  datac = rename(datac, c("mean" = measurevar))
+  names(datac)[4] = paste(measurevar)
   
   datac$se = datac$sd / sqrt(datac$N)
   ciMult = qt(level/2 + .5, datac$N-1)
@@ -61,7 +61,7 @@ plot_fatmeans = function(data,
     
   }
   
-  pd = position_dodge(0.9)
+  pd = ggplot2::position_dodge(0.9)
   if(invert == FALSE){
 p = ggplot2::ggplot(data=datac, aes(x=x, y=dep, fill=y))+
    geom_bar(aes(fill = y), stat="identity", position=position_dodge())
