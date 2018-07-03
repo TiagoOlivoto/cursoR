@@ -1,17 +1,24 @@
 
 plot_uni = function(data,
-                       x,
-                       y,
-                       fit,
-                       level = 0.95,
-                       xlab = NULL,
-                       ylab = NULL,
-                       col = "red",
-                       alpha = 0.2,
-                       size.shape = 1.5,
-                       size.line = 1,
-                       cex = 12,
-                       fontfam = "sans"){
+                    x,
+                    y,
+                    fit,
+                    level = 0.95,
+                    xlab = NULL,
+                    ylab = NULL,
+                    export = FALSE,
+                    file.type = "pdf",
+                    file.name = NULL,
+                    width = 6,
+                    height = 6,
+                    resolution = 300,
+                    col = "red",
+                    alpha = 0.2,
+                    size.shape = 1.5,
+                    size.line = 1,
+                    cex = 12,
+                    fontfam = "sans"){
+  
   cl = match.call()
 if(col == TRUE){
   stop(paste0("O argumento col = ", cl$col, " é inválido. Informe uma cor, ou FALSE para uma plotagem preto e branco"))
@@ -88,6 +95,26 @@ p = p + p_smooth +
         panel.grid.minor.x = element_blank(), panel.grid.minor.y = element_blank())+
 ggplot2::labs(y = ylab, x = xlab)
 
-  return(p)
+if (export  ==  F|FALSE) {
+  plot(p)
+} else
+  
+  if(file.type == "pdf"){
+    if (is.null(file.name)){
+      pdf("Plotted curves.pdf",width = width, height = height)
+    } else
+      pdf(paste0(file.name, ".pdf"), width = width, height = height)
+    plot(p)
+    dev.off()
+  }
+
+if (file.type == "tiff"){
+  if (is.null(file.name)){
+    tiff(filename = "Plotted curves.tiff",width = width, height = height, units = "in", compression = "lzw", res = resolution)
+  } else
+    tiff(filename = paste0(file.name, ".tiff"), width = width, height = height, units = "in", compression = "lzw", res = resolution)
+  plot(p)
+  dev.off()
+}
 
 }
