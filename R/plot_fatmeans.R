@@ -20,7 +20,6 @@ plot_fatmeans = function(data,
                      fontfam = "sans",
                      na.rm=FALSE){
   
-  library(plyr)
   cl = match.call()
   # New version of length which can handle NA's: if na.rm==T, don't count them
   length2 = function (x, na.rm=FALSE) {
@@ -30,7 +29,7 @@ plot_fatmeans = function(data,
   
   # This does the summary. For each group's data frame, return a vector with
   # N, mean, and sd
-  datac = ddply(data, groupvars, .drop = TRUE,
+  datac = plyr::ddply(data, groupvars, .drop = TRUE,
                  .fun = function(xx, col) {
                    c(N    = length2(xx[[col]], na.rm=na.rm),
                      mean = mean   (xx[[col]], na.rm=na.rm),
