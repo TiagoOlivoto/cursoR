@@ -1,12 +1,13 @@
-\name{plot_means}
-\alias{plot_means}
+\name{plot_fatmeans}
+\alias{plot_fatmeans}
 \title{Gráficos de barras em experimentos bifatoriais}
 \usage{
-plot_fat(data,  measurevar, groupvars = NULL, errorbar = "se",
-        level = 0.95, invert = FALSE, col = TRUE, xlab = NULL, ylab = NULL,
-         export = FALSE, file.type = "pdf", file.name = NULL, width = 6,
-         height = 6, resolution = 300,  width.errb = 0.3, cex = 12, 
-         fontfam = "sans", legend.position = "bottom", na.rm=FALSE)
+plot_fatmeans(data,  measurevar, groupvars = NULL, errorbar = TRUE,
+        stat.erbar = "se", width.erbar = 0.3, level = 0.95, invert = FALSE,
+        col = TRUE, xlab = NULL, ylab = NULL, export = FALSE, 
+        file.type = "pdf", file.name = NULL, width = 6, height = 6,
+        resolution = 300, legend.position = "bottom", cex = 12,
+        fontfam = "sans", na.rm=FALSE)
 }
 \description{
 Confecciona gráficos de barra personalizados para plotagem para plotagem das médias em experimentos do tipo bifatoriais. Barras de erro também podem ser inclidas.
@@ -55,6 +56,8 @@ Confecciona gráficos de barra personalizados para plotagem para plotagem das méd
 \item{legend.position}{A posição da legenda.}
     
 \item{cex}{O tamanho das letras do gráfico.}
+
+\item{fontfam}{A família de fonte. Padrão é "sans"}
 
 \item{na.rm}{Argumento lógico, Se verdadeiro, os valores ausentes são desconsiderados na estimativa das estatísticas.}
 
