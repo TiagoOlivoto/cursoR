@@ -17,11 +17,13 @@ importFrom(plyr, ddply)
 importFrom(plotly, ggplotly)
 importFrom(reshape, melt)
 importFrom(psych, smc)
+import(plot3D)
+importFrom(hydroGOF, gof)
 importFrom(stability, ge_effects, er_anova, stab_measures, stab_reg)
 importFrom("graphics", "par", "plot")
 importFrom("stats", "as.formula", "cor", "cor.test", "lm", "pf",
              "symnum", "as.dist", "cophenetic", "cutree", "hclust",
              "prcomp", "sd", "aggregate", "anova", "aov", "cov2cor",
-           "kmeans", "pt")
+           "kmeans", "pt", "D", "predict", "qt", "shapiro.test")
 importFrom("utils", "combn", "winDialog")
 S3method(summary, path.coeff)
