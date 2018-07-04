@@ -7,6 +7,9 @@ plot_fatmeans = function(data,
                      level= .95,
                      invert = FALSE,
                      col = TRUE,
+                     width.bar = 0.9,
+                     cex.angle = 0,
+                     cex.hjust = 0.5,
                      xlab = NULL,
                      ylab = NULL,
                      export = FALSE,
@@ -69,18 +72,18 @@ plot_fatmeans = function(data,
     
   }
   
-  pd = ggplot2::position_dodge(0.9)
+  pd = ggplot2::position_dodge(width.bar)
   if(length(groupvars)>1){
   if(invert == FALSE){
 p = ggplot2::ggplot(data=datac, aes(x=x, y=dep, fill=y))+
-   geom_bar(aes(fill = y), stat="identity", position=position_dodge())
+   geom_bar(aes(fill = y), stat="identity", position=position_dodge(), width = width.bar)
   } else{
 p = ggplot2::ggplot(data=datac, aes(x=y, y=dep, fill=x))+
-    geom_bar(aes(fill = x), stat="identity", position=position_dodge())
+    geom_bar(aes(fill = x), stat="identity", position=position_dodge(),width = width.bar)
   }
   } else{
         p = ggplot2::ggplot(data=datac, aes(x=x, y=dep))+
-        geom_bar(stat="identity", position=position_dodge())
+        geom_bar(stat="identity", position=position_dodge(), width = width.bar)
   }
   
   
@@ -108,6 +111,7 @@ p = p + scale_fill_grey(start = 0, end = .9)
   p = p + ggplot2::theme(axis.ticks.length = unit(.2, "cm"),
                    axis.text = element_text(size = cex, family = fontfam, colour = "black"),
                    axis.title = element_text(size = cex,  family = fontfam, colour = "black"),
+                   axis.text.x = element_text(angle = cex.angle, hjust = cex.hjust, size = cex, colour = "black"),
                    axis.ticks = element_line(colour = "black"),
                    plot.margin = margin(0.2, 0.2, 0.2, 0.2, "cm"),
                    legend.title = element_blank(),
