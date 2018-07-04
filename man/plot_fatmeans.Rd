@@ -67,6 +67,8 @@ Confecciona gráficos de barra personalizados para plotagem para plotagem das méd
 
 \item{na.rm}{Argumento lógico, Se verdadeiro, os valores ausentes são desconsiderados na estimativa das estatísticas.}
 
+\item{verbose}{Argumento lógico, Se verdadeiro, As médias de cada combinação dos fatores, juntamente com as estatisticas de dispersão são impressas no console.}
+
  
  }
 
