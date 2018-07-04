@@ -21,7 +21,8 @@ plot_fatmeans = function(data,
                      legend.position = "bottom",
                      cex = 12,
                      fontfam = "sans",
-                     na.rm=FALSE){
+                     na.rm=FALSE,
+                     verbose = TRUE){
   
   if(invert == TRUE & length(groupvars)==1){
     stop("Argumentos inválidos. Não é possivel inverter a seleção com apenas um fator.")
@@ -121,8 +122,9 @@ p = p + scale_fill_grey(start = 0, end = .9)
                    panel.grid.major.x = element_blank(), panel.grid.major.y = element_blank(),
                    panel.grid.minor.x = element_blank(), panel.grid.minor.y = element_blank())+
     ggplot2::labs(y = ylab, x = xlab)
+  if(verbose == TRUE){
   print(datac)
-  
+  }
   if (export  ==  F|FALSE) {
     return(p)
   } else
