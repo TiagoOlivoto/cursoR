@@ -20,6 +20,9 @@ plot_fatmeans = function(data,
                      fontfam = "sans",
                      na.rm=FALSE){
   
+  if(invert == TRUE & length(groupvars)==1){
+    stop("Argumentos inválidos. Não é possivel inverter a seleção com apenas um fator.")
+  }
   cl = match.call()
   # New version of length which can handle NA's: if na.rm==T, don't count them
   length2 = function (x, na.rm=FALSE) {
@@ -37,15 +40,20 @@ plot_fatmeans = function(data,
                  },
                  measurevar
   )
-  
+  if(length(groupvars)>1){
   names(datac)[4] = paste(measurevar)
-  
+  } else{
+  names(datac)[3] = paste(measurevar)
+  }
   datac$se = datac$sd / sqrt(datac$N)
   ciMult = qt(level/2 + .5, datac$N-1)
   datac$ci = datac$se * ciMult
   
+  if(length(groupvars)>1){
   names(datac) = c("x", "y", "N", "dep", "sd", "se", "ci")
-  
+  } else {
+  names(datac) = c("x", "N", "dep", "sd", "se", "ci")  
+  }
   if (is.null(ylab) == T){
     ylab = cl$measurevar
   }else {ylab = ylab}
@@ -62,6 +70,7 @@ plot_fatmeans = function(data,
   }
   
   pd = ggplot2::position_dodge(0.9)
+  if(length(groupvars)>1){
   if(invert == FALSE){
 p = ggplot2::ggplot(data=datac, aes(x=x, y=dep, fill=y))+
    geom_bar(aes(fill = y), stat="identity", position=position_dodge())
@@ -69,6 +78,13 @@ p = ggplot2::ggplot(data=datac, aes(x=x, y=dep, fill=y))+
 p = ggplot2::ggplot(data=datac, aes(x=y, y=dep, fill=x))+
     geom_bar(aes(fill = x), stat="identity", position=position_dodge())
   }
+  } else{
+        p = ggplot2::ggplot(data=datac, aes(x=x, y=dep))+
+        geom_bar(stat="identity", position=position_dodge())
+  }
+  
+  
+  
  p = p + ggplot2::theme_bw()
  
  if(col == FALSE){
