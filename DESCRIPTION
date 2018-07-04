@@ -25,7 +25,9 @@ Imports: corrplot,
          psych,
          stability,
          plotly, 
-         reshape
+         reshape,
+         plot3D,
+         hydroGOF
 RoxygenNote: 6.0.1
 
 
