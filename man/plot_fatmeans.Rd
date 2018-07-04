@@ -4,13 +4,13 @@
 \usage{
 plot_fatmeans(data,  measurevar, groupvars = NULL, errorbar = TRUE,
         stat.erbar = "se", width.erbar = 0.3, level = 0.95, invert = FALSE,
-        col = TRUE, xlab = NULL, ylab = NULL, export = FALSE, 
-        file.type = "pdf", file.name = NULL, width = 6, height = 6,
-        resolution = 300, legend.position = "bottom", cex = 12,
-        fontfam = "sans", na.rm=FALSE)
+        col = TRUE, width.bar = 0.9, cex.angle = 0, cex.hjust = 0.5,
+        xlab = NULL, ylab = NULL, export = FALSE, file.type = "pdf",
+        file.name = NULL, width = 6, height = 6, resolution = 300,
+        legend.position = "bottom", cex = 12, fontfam = "sans", na.rm=FALSE)
 }
 \description{
-Confecciona gráficos de barra personalizados para plotagem para plotagem das médias em experimentos do tipo bifatoriais. Barras de erro também podem ser inclidas.
+Confecciona gráficos de barra personalizados para plotagem para plotagem das médias em experimentos do tipo bifatoriais. Barras de erro também podem ser incluidas.
 
 }
 
@@ -36,6 +36,12 @@ Confecciona gráficos de barra personalizados para plotagem para plotagem das méd
 \item{invert}{Argumento lógico. Se \code{TRUE}, a ordem dos fatores informados no argumento \code{groupvars} é alterada no gráfico.}
 
 \item{col}{Argumento lógico. Se \code{FALSE}, uma escala de cinza é utilizada.}
+
+\item{width.bar}{A largura das barras no gráfico. Padrão é 0.9 possíveis valores [0-1].}
+
+\item{cex.angle}{O angulo do texto da legenda. Padrão é 0.}
+
+\item{cex.hjust}{O ajuste horizontal do texto da legenda. Padrão é 0.5. Utilize este argumento para ajustar o texto quando o angulo do texto é diferente de 0.}
 
 \item{xlab}{O título do eixo x.}
 
