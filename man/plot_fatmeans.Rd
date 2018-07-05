@@ -4,8 +4,8 @@
 \usage{
 plot_fatmeans(data,  measurevar, groupvars = NULL, errorbar = TRUE,
         stat.erbar = "se", width.erbar = 0.3, level = 0.95, invert = FALSE,
-        col = TRUE, width.bar = 0.9, cex.angle = 0, cex.hjust = 0.5,
-        xlab = NULL, ylab = NULL, export = FALSE, file.type = "pdf",
+        col = TRUE, palette = "Spectral", width.bar = 0.9, cex.angle = 0, 
+        cex.hjust = 0.5, xlab = NULL, ylab = NULL, export = FALSE, file.type = "pdf",
         file.name = NULL, width = 6, height = 6, resolution = 300,
         legend.position = "bottom", cex = 12, fontfam = "sans", na.rm=FALSE)
 }
@@ -36,6 +36,8 @@ Confecciona gráficos de barra personalizados para plotagem para plotagem das méd
 \item{invert}{Argumento lógico. Se \code{TRUE}, a ordem dos fatores informados no argumento \code{groupvars} é alterada no gráfico.}
 
 \item{col}{Argumento lógico. Se \code{FALSE}, uma escala de cinza é utilizada.}
+
+\item{palette}{A paleta de cores a ser utilizada. Para maiores detalhes, veja \code{?scale_colour_brewer}.}
 
 \item{width.bar}{A largura das barras no gráfico. Padrão é 0.9 possíveis valores [0-1].}
 
