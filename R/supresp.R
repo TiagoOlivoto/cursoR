@@ -15,18 +15,13 @@ Resp = data[(match(c(resp), names(data)))]
 
 
 data = cbind(A, D, Bloco, Resp)
-#########################   NÃO MECHER!!!   #################################
-                
-names=colnames(data)                                                     #
-A=names[1]                                                                  #
-D=names[2]                                                                  #
-Bloco=names[3]                                                              #
-Resp=names[4]                                                               #
-#
-#############################################################################
+names = colnames(data)
+A = names[1]
+D = names[2]
+Bloco = names[3]
+Resp = names[4]
 
-
-length2 = function (x, na.rm=FALSE) {
+length2 = function(x, na.rm=FALSE) {
   if (na.rm) sum(!is.na(x))
   else       length(x)
 }
@@ -42,71 +37,38 @@ for (i in 1:3){
   data[,i]  = as.factor(data[,i])
 }
 
-F1=as.formula(paste0(Resp, "~", paste(Bloco),"+", paste(A), "+", paste(D), "+", paste(A), "*", paste(D)))
-ANOVA=aov(F1, data = data)
+F1 = as.formula(paste0(Resp, "~", paste(Bloco),"+", paste(A), "+", paste(D), "+", paste(A), "*", paste(D)))
+ANOVA = aov(F1, data = data)
 sum_test = unlist(summary(ANOVA))
-pValue_Bloco=sum_test["Pr(>F)1"]
-pValue_A=sum_test["Pr(>F)2"]
-pValue_D=sum_test["Pr(>F)3"]
-pValue_AD=sum_test["Pr(>F)4"]
-
-if (pValue_AD<pValor) {
-  cat(paste0("A interação ", A ,"*", D , " foi significativa!",
-                    "\np-Valor = ", format(pValue_AD, scipen=0, digits=5, scientific=TRUE),
-                    "\nVerifique os resultados a seguir."))
-  cat("\n")
-}
-
-cat(paste0("Valores de probabilidade de erro obtidos na ANOVA",
-                  "\n",Bloco," = ", format(pValue_Bloco, scipen=0, digits=5, scientific=TRUE),
-                  "\n",A," = ", format(pValue_A, scipen=0, digits=5, scientific=TRUE),
-                  "\n",D," = ", format(pValue_D, scipen=0, digits=5, scientific=TRUE),
-                  "\n",A,"*",D," = ", format(pValue_AD, scipen=0, digits=5, scientific=TRUE)))
+pValue_Bloco = sum_test["Pr(>F)1"]
+pValue_A = sum_test["Pr(>F)2"]
+pValue_D = sum_test["Pr(>F)3"]
+pValue_AD = sum_test["Pr(>F)4"]
 
 
-
-
-########### ANOVA do modelo de equação de superfície de resposta ############
-################## Modelo: Y = A * D + I(A^2) + I(D^2)   ####################
-
-F2=as.formula(paste0(Resp, "~", paste(A),"*", paste(D), "+", "I(",paste(A),"^2)", "+","I(",paste(D), "^2)"))
-SurfMod=lm(F2, data=data2)
-B0=SurfMod$coef[1]
-B1=SurfMod$coef[2]
-B2=SurfMod$coef[3]
-B11=SurfMod$coef[4]
-B22=SurfMod$coef[5]
-B12=SurfMod$coef[6]
+F2 = as.formula(paste0(Resp, "~", paste(A),"*", paste(D), "+", "I(",paste(A),"^2)", "+","I(",paste(D), "^2)"))
+SurfMod = lm(F2, data=data2)
+B0 = SurfMod$coef[1]
+B1 = SurfMod$coef[2]
+B2 = SurfMod$coef[3]
+B11 = SurfMod$coef[4]
+B22 = SurfMod$coef[5]
+B12 = SurfMod$coef[6]
 
 ### função para estimar pontos máximos e autovalores da matriz de parâmetros ###
 
-  B12c=B12/2
+  B12c = B12/2
   P = cbind(c(B11,B12c), c(B12c,B22))
   P = as.matrix(P)
   invA = solve(P)
   X = cbind(c(B1, B2))
-  Pontos= -0.5*(invA%*%X)
-  dA=Pontos[1]
-  dD=Pontos[2]
-  AV1=eigen(P)$values[1]
-  AV2=eigen(P)$values[2]
+  Pontos = -0.5*(invA %*% X)
+  dA = Pontos[1]
+  dD = Pontos[2]
+  AV1 = eigen(P)$values[1]
+  AV2 = eigen(P)$values[2]
   
-  if (AV1>0 && AV2>0) {
-    cat(paste0("O ponto ótimo é de mínima!"))
-  } else if (AV1<0 && AV2<0) {
-    cat(paste0("O ponto ótimo é de máxima!"))
-  } else
-    cat(paste0("O ponto é de sela.",
-                      "\nA dose ótima não está no intervalo dos tratamentos.",
-                      "\nVerifique os resultados a seguir!"))
-  
-  
-  cat(paste0("Abaixo são apresentados as doses ótimas e os autovalores da matriz de parâmetros (A).",
-                             "\nDose ótima ", A,": ",round(dA,3),
-                             "\nDose ótima ", D, ": ",round(dD,3),
-                             "\nAutovalor 1: " ,round(AV1,6),
-                             "\nAutovalor 2: " ,round(AV2,6)))
-  
+ 
   ################# Exportando os resultados para o diretório ##################
  results = dplyr::mutate(data2,
                          predicted = SurfMod$fitted.values,
@@ -116,19 +78,35 @@ B12=SurfMod$coef[6]
                       obs = data2[(match(c(resp), names(data2)))], digitis = 5))
   names(EstAjust) = "statistics"
 
-
+  cat("-----------------------------------------------------------------\n")
   cat("Resultado da análise de variância", "\n")
   cat("Modelo: Y = m + bk + Ai + Dj + (AD)ij + eijk", "\n")
+  cat("-----------------------------------------------------------------\n")
   cat("\n")
   print(summary(ANOVA))
   cat("\n")
-  Norm=shapiro.test(ANOVA$residuals)
+  Norm = shapiro.test(ANOVA$residuals)
+  cat("-----------------------------------------------------------------\n")
   cat("Teste Shapiro-Wilk para normalidade de resíduos:", "\n")
   cat("W = ",Norm$statistic, "p-valor = ", Norm$p.value, "\n")
   if (Norm$p.value>0.05){
     cat("De a cordo com o teste Shapiro-Wilk, os resíduos se aderem a uma distribuição normal.","\n")
   }
-  cat("\n")
+  cat("-----------------------------------------------------------------\n")
+
+  if (pValue_AD<pValor) {
+    cat(paste0("A interação ", A ,"*", D , " foi significativa!",
+               "\np-Valor = ", format(pValue_AD, scipen=0, digits=5, scientific=TRUE),
+               "\nVerifique as probabilidades abaixo."))
+    cat("\n")
+  }
+    cat(paste0("Valores de probabilidade de erro obtidos na ANOVA",
+             "\n",Bloco," = ", format(pValue_Bloco, scipen=0, digits=5, scientific=TRUE),
+             "\n",A," = ", format(pValue_A, scipen=0, digits=5, scientific=TRUE),
+             "\n",D," = ", format(pValue_D, scipen=0, digits=5, scientific=TRUE),
+             "\n",A,"*",D," = ", format(pValue_AD, scipen=0, digits=5, scientific=TRUE)))
+    cat("\n")
+  
   cat("-----------------------------------------------------------------\n")
   cat("Anova do modelo de superfície de resposta", "\n")
   print(F2)
@@ -144,7 +122,6 @@ B12=SurfMod$coef[6]
   cat("Equação de superfície de resposta", "\n")
   cat("Y = B0 + B1*A + B2*D + B11*A^2 + B22*D^2 + B12*A*D", "\n")
   cat("-----------------------------------------------------------------\n")
-  
   cat("Parâmetros estimados", "\n")
   cat(paste0("B0: ", format(round(B0,7), nsmall = 7),"\n"))
   cat(paste0("B1: ", format(round(B1,7), nsmall = 7),"\n"))
@@ -152,12 +129,6 @@ B12=SurfMod$coef[6]
   cat(paste0("B11: ", format(round(B11,7), nsmall = 7),"\n"))
   cat(paste0("B22: ", format(round(B22,7), nsmall = 7),"\n"))
   cat(paste0("B12: ", format(round(B12,7), nsmall = 7),"\n"))
-  cat("-----------------------------------------------------------------\n")
-  
-  cat("Equação de superfície de resposta ajustada", "\n")
-  cat(paste0("A = ", A,"\n"))
-  cat(paste0("D = ", D,"\n"))
-  cat(paste0("y = " , round(B0,5), "+",round(B1,5),"A+",round(B2,5),"D+" , round(B11,5),"A^2+" , round(B22,5),"D^2+" , round(B12,5),"A*D","\n"))
   cat("-----------------------------------------------------------------\n")
   
   cat("Matriz de parametros (A)","\n")
@@ -176,12 +147,28 @@ B12=SurfMod$coef[6]
   cat("-----------------------------------------------------------------\n")
   
   cat("Equação para estimativa das doses ótimas (A e D)","\n")
-  cat("-0.5*(invA*X)", "\n")
+  cat("-0.5*(invA*X)")
+  cat(paste0("\nAutovalor 1: " ,round(AV1,6),
+             "\nAutovalor 2: " ,round(AV2,6)))
+  cat("\n")
+  if (AV1 > 0 && AV2 > 0) {
+    cat(paste0("O ponto ótimo é de mínima!"))
+  } else if (AV1 < 0 && AV2 < 0) {
+    cat(paste0("O ponto ótimo é de máxima!"))
+  } else
+    cat(paste0("O ponto é de sela.",
+               "\nA dose ótima não está no intervalo dos tratamentos.",
+               "\nVerifique os resultados a seguir!"))
+  cat("\n")
   cat("-----------------------------------------------------------------\n")
-  
   cat("O ponto máximo é obtido com as seguintes doses ótimas:", "\n")
   cat(paste0("Dose ótima (",A,"): ", round(dA,4),"\n"))
   cat(paste0("Dose ótima (",D,"): ", round(dD,4),"\n"))
+  cat("-----------------------------------------------------------------\n")
+  cat("Equação de superfície de resposta ajustada", "\n")
+  cat(paste0("A = ", A,"\n"))
+  cat(paste0("D = ", D,"\n"))
+  cat(paste0("y = " , round(B0,5), "+",round(B1,5),"A+",round(B2,5),"D+" , round(B11,5),"A^2+" , round(B22,5),"D^2+" , round(B12,5),"A*D","\n"))
   cat("-----------------------------------------------------------------\n")
   
   cat("Estatisticas de ajuste","\n")
