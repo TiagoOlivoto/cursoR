@@ -183,6 +183,18 @@ B12 = SurfMod$coef[6]
   print(results)
   cat("-----------------------------------------------------------------\n")
 
+  pvalor.shapiro = shapiro.test(results$residuals)$p.value
+  cat("Shapiro-Wilk normality test\n")
+  cat("p-value: ", pvalor.shapiro, "\n")
+  if (pvalor.shapiro < 0.05) {
+  cat("WARNING: at 5% of significance, residuals can not be considered normal!", "\n")
+  cat("------------------------------------------------------------------")
+  } else {
+    cat("According to Shapiro-Wilk normality test at 5% of significance, residuals can be considered normal.", "\n")
+  cat("------------------------------------------------------------------\n")
+  }
+  
+  
   eq = paste0("y = " , round(B0,5), "+",round(B1,5),"A+",round(B2,5),"D+" , round(B11,5),"A^2+" , round(B22,5),"D^2+" , round(B12,5),"AD")
   
 return(structure(list(results = results,
