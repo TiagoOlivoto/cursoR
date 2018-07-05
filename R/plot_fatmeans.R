@@ -7,6 +7,7 @@ plot_fatmeans = function(data,
                      level= .95,
                      invert = FALSE,
                      col = TRUE,
+                     palette = "Spectral",
                      width.bar = 0.9,
                      cex.angle = 0,
                      cex.hjust = 0.5,
@@ -77,16 +78,17 @@ plot_fatmeans = function(data,
   if(length(groupvars)>1){
   if(invert == FALSE){
 p = ggplot2::ggplot(data=datac, aes(x=x, y=dep, fill=y))+
-   geom_bar(aes(fill = y), stat="identity", position=position_dodge(), width = width.bar)
+    geom_bar(aes(fill = y), colour = "black", stat="identity", position=position_dodge(), width = width.bar)+
+    scale_fill_brewer(type = "qualitative", palette = palette)
   } else{
 p = ggplot2::ggplot(data=datac, aes(x=y, y=dep, fill=x))+
-    geom_bar(aes(fill = x), stat="identity", position=position_dodge(),width = width.bar)
+    geom_bar(aes(fill = x), colour = "black", stat="identity", position=position_dodge(),width = width.bar)
+    scale_fill_brewer(type = "qualitative", palette = palette)
   }
   } else{
         p = ggplot2::ggplot(data=datac, aes(x=x, y=dep))+
         geom_bar(stat="identity", position=position_dodge(), width = width.bar)
   }
-  
   
   
  p = p + ggplot2::theme_bw()
