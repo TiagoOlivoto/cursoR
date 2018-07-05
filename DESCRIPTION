@@ -8,6 +8,7 @@ Maintainer: Tiago Olivoto <tiagoolivoto@gmail.com>
 Description: Pacote criado para o curso R realizado pelo grupo Experimentação da UFSM-SM. As funções utilizadas no curso são disponibilizadas.
 Depends: R (>= 3.5.0)
 License: GPL (>=3)
+URL: https://github.com/TiagoOlivoto/cursoR
 Encoding: ISO-8859-1
 LazyData: true
 Imports: corrplot,
