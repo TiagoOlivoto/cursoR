@@ -11,7 +11,7 @@ import(ade4)
 import(pvclust)
 import(fpc)
 import(StatMatch)
-importFrom("grDevices", "dev.off", "pdf", "tiff")
+importFrom("grDevices", "dev.off", "pdf", "tiff", "col2rgb", "rgb")
 importFrom(dplyr, mutate, left_join, select, "%>%")
 importFrom(plyr, ddply)
 importFrom(plotly, ggplotly)
@@ -24,6 +24,6 @@ importFrom("graphics", "par", "plot")
 importFrom("stats", "as.formula", "cor", "cor.test", "lm", "pf",
              "symnum", "as.dist", "cophenetic", "cutree", "hclust",
              "prcomp", "sd", "aggregate", "anova", "aov", "cov2cor",
-           "kmeans", "pt", "D", "predict", "qt", "shapiro.test")
+           "kmeans", "pt", "D", "predict", "qt", "shapiro.test", "approx")
 importFrom("utils", "combn", "winDialog")
 S3method(summary, path.coeff)
