@@ -5,7 +5,9 @@
 corr.plot(Dataset, prob = 0.05, export = FALSE, file.type = "pdf",
          file.name = NULL, width = 8, height = 7, resolution = 300,
          sizepoint = 0.5, minsize = 2, maxsize = 3, smooth = FALSE,
-         signcol = "green", alpha = 0.15, diagcol = "gray", pan.spacing = 0.15)
+         signcol = "green", alpha = 0.15, diagcol = "gray", 
+         col.up.panel = "gray", col.lw.panel = "gray",
+         col.dia.panel = "black", pan.spacing = 0.15)
 }
 \description{
 Plota o coeficiente de correlação em uma visualização gráfico-numérica

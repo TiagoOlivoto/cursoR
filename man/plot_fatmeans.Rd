@@ -7,7 +7,7 @@ plot_fatmeans(data,  measurevar, groupvars = NULL, errorbar = TRUE,
         col = TRUE, palette = "Spectral", width.bar = 0.9, cex.angle = 0, 
         cex.hjust = 0.5, xlab = NULL, ylab = NULL, export = FALSE, file.type = "pdf",
         file.name = NULL, width = 6, height = 6, resolution = 300,
-        legend.position = "bottom", cex = 12, fontfam = "sans", na.rm=FALSE)
+        legend.position = "bottom", cex = 12, fontfam = "sans", na.rm=FALSE, verbose = FALSE)
 }
 \description{
 Confecciona gráficos de barra personalizados para plotagem para plotagem das médias em experimentos do tipo bifatoriais. Barras de erro também podem ser incluidas.

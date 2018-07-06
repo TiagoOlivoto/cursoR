@@ -18,6 +18,8 @@ Função para interpolação de cores. Permite criar um vetor de cores, úteis na con
  
 \item{alpha}{A transparência das cores. Varia de 0(totalmente transpararente) a 1 (totalmente opaca).}
 
+}
+
 \author{Tiago Olivoto \email{tiagoolivoto@gmail.com}}
 
 
