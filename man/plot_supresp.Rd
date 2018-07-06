@@ -10,14 +10,14 @@ plot_supresp(x, type, col = NULL, xlab = NULL, ylab = NULL,
              height = 6, resolution = 300, ...)                    
 }
 \description{
-Confeciona gráficos de superficie de resposta (contourn plot e surface plot) tendo como base um objeto da função \code{supresp}.
+Confeciona gráficos de superficie de resposta (contour plot e surface plot) tendo como base um objeto da função \code{supresp}.
 }
 
 \arguments{
 
 \item{x}{Um objeto da classe \code{supresp}.}
 
-\item{type}{Argumento numérico indicando o tipo do gráfico a ser criado. 1 = gráfico de residuais; 2 = gráfico de contorno (contourn plot); ou 3 = gráfico de superfície (surface plot) }
+\item{type}{O tipo do gráfico a ser gerado. Os possíveis valres são: "residuals", "contour" e "surface" (default).}
  
 \item{col}{Argumento lógico. Padrão \code{NULL}. Cores personalizadas podem ser criadas utilizando o argumento ramp.col. Por exemplo, se uma escala de cinza é desejada, basta indicar o argumento \code{col = ramp.col(c("white", "black"))}. Peletas de cores automáticas também podem ser utilizadas. O padrão é \code{jet.col}. Outros possíveis argumentos são \code{jet2.col}, \code{gg.col}, \code{gg2.col}, \code{ramp.col}, e \code{alpha.col}. Para maiores detalhes, veja ?ramp.col}
 
