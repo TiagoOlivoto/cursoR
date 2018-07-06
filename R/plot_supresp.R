@@ -1,5 +1,5 @@
 plot_supresp = function(x,
-                        type,
+                        type = "surface",
                         col = NULL,
                         xlab = NULL,
                         ylab = NULL,
@@ -73,7 +73,7 @@ if(export == FALSE){
     par( mfrow = c(1, 1))
   }
   
-if(type == "contourn"){
+if(type == "contour"){
   plot3D::image2D(z = z,
                   x = unique(x3[,1]),
                   y = unique(x3[,2]),
@@ -118,7 +118,7 @@ if(type == "surface"){
         par( mfrow = c(1, 1))
       }
       
-      if(type == "contourn"){
+      if(type == "contour"){
         plot3D::image2D(z = z,
                         x = unique(x3[,1]),
                         y = unique(x3[,2]),
@@ -163,7 +163,7 @@ if(type == "surface"){
         par( mfrow = c(1, 1))
       }
       
-      if(type == "contourn"){
+      if(type == "contour"){
         plot3D::image2D(z = z,
                         x = unique(x3[,1]),
                         y = unique(x3[,2]),
