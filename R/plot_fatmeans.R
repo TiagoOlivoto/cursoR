@@ -23,7 +23,7 @@ plot_fatmeans = function(data,
                      cex = 12,
                      fontfam = "sans",
                      na.rm=FALSE,
-                     verbose = TRUE){
+                     verbose = FALSE){
   
   if(invert == TRUE & length(groupvars)==1){
     stop("Argumentos inválidos. Não é possivel inverter a seleção com apenas um fator.")
