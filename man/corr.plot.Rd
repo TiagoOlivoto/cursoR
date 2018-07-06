@@ -4,8 +4,8 @@
 \usage{
 corr.plot(Dataset, prob = 0.05, export = FALSE, file.type = "pdf",
          file.name = NULL, width = 8, height = 7, resolution = 300,
-         sizepoint = 0.5, minsize = 1.5, maxsize = 2.5, smooth = FALSE,
-         signcol = "gray", alpha = 0.25, diagcol = "gray")
+         sizepoint = 0.5, minsize = 2, maxsize = 3, smooth = FALSE,
+         signcol = "green", alpha = 0.15, diagcol = "gray", pan.spacing = 0.15)
 }
 \description{
 Plota o coeficiente de correlação em uma visualização gráfico-numérica
@@ -37,11 +37,18 @@ Plota o coeficiente de correlação em uma visualização gráfico-numérica
 
   \item{smooth}{Argumento lógico para declarar se uma reta de relação linear é exibida. Padrão é \code{FALSE}}
 
-  \item{signcol}{Cor para indicar as correlações significantes. Padrão é "gray"}
+  \item{signcol}{Cor para indicar as correlações significantes. Padrão é "green"}
 
-  \item{alpha}{Valor para indicar a transparência da cor informada no argumento \code{signcol}. 0 = totalmente transparente; 1 = cor completa. Padrão é 0.2}
+  \item{alpha}{Valor para indicar a transparência da cor informada no argumento \code{signcol}. 0 = totalmente transparente; 1 = cor completa. Padrão é 0.15}
 
   \item{diagcol}{Cor para representar a distribuição da variável (diagonal). Padrão é "gray"}
+
+  \item{col.up.panel, col.lw.panel, col.dia.panel}{A cor da borda dos painéis da diagonal superior, inferior e da diagonal, respectivamente. Os padrões são, respectivamente "gray", "gray" e "black".}
+
+
+  \item{pan.spacing}{O espaçamento entre os painéis. Padrão é 0.15. Valores maiores aumentam a distância entre os painéis. Se o valor for 0, não há espaço entre os painéis.}
+  
+  
 }
 
 \author{Tiago Olivoto \email{tiagoolivoto@gmail.com}}
