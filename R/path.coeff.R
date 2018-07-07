@@ -91,7 +91,7 @@ if (brutstepwise == FALSE){
             panel.border = element_rect(colour = "black", fill = NA, size = 1),
             panel.grid.major.x = element_blank(), panel.grid.major.y = element_blank(),
             panel.grid.minor.x = element_blank(), panel.grid.minor.y = element_blank()) +
-      labs(x = "k values", y = expression(paste( beta, " values")))+
+      labs(x = "k values", y = "Beta values")+
       geom_abline(intercept = 0, slope = 0)+
       scale_x_continuous(breaks=seq(0,1,by=0.1))
     p2 = suppressMessages(plotly::ggplotly(p1))
