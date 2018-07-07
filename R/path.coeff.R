@@ -94,8 +94,11 @@ if (brutstepwise == FALSE){
       labs(x = "k values", y = expression(paste( beta, " values")))+
       geom_abline(intercept = 0, slope = 0)+
       scale_x_continuous(breaks=seq(0,1,by=0.1))
-    iterplot = plotly::ggplotly(p1)
-  } else {p1 = "No graphic generated due to correction value"}
+    p2 = suppressMessages(plotly::ggplotly(p1))
+  } else {
+    p1 = "No graphic generated due to correction value"
+    p2 = "No graphic generated due to correction value"
+  }
 
   eigen = eigen(cor.x)
   Det = det(cor.x)
@@ -145,7 +148,7 @@ if (brutstepwise == FALSE){
                           Eigen = AvAvet,
                           VIF = VIF,
                           plot = p1,
-                          iterplot = iterplot,
+                          iterplot = p2,
                           Predictors = pred,
                           CN = NC,
                           Det = Det,
