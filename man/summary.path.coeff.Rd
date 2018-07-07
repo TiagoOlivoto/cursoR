@@ -12,7 +12,7 @@ Summary the  \code{path.coeff} object in two ways. By default, the results are s
 
 \arguments{
 
-  \item{object}{The \code{WAASB} object}
+  \item{object}{The \code{path.coeff} object}
   
   \item{model}{The model to be summarized. Argument valid if the class of \code{path.coeff} object is "BRUTEPATH"}
 
