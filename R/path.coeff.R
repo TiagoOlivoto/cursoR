@@ -145,7 +145,7 @@ if (brutstepwise == FALSE){
                           Eigen = AvAvet,
                           VIF = VIF,
                           plot = p1,
-                          iterplot = itgraphic,
+                          iterplot = iterplot,
                           Predictors = pred,
                           CN = NC,
                           Det = Det,
