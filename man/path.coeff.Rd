@@ -1,6 +1,6 @@
 \name{path.coeff}
 \alias{path.coeff}
-\title{Análise de trilha e diagnóstico de multicolinearidade}
+\title{Análise de trilha e seleção de variáveis para preditores com mínima multicolinearidade}
 \usage{
 path.coeff(data, resp, pred = NULL, exclude = FALSE, correction = NULL,
           stepwise = FALSE, brutstepwise = FALSE)
