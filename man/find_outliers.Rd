@@ -2,7 +2,7 @@
 \alias{find_outliers}
 \title{Métodos estatísticos e gráficos para identificar outliers}
 \usage{
-find_outliers = function(data, var, type, timescd = 4)
+find_outliersfunction(data, var, type = "multivariado", timescd = 4)
 }
 \description{
 Identifica possíveis outliers em um conjunto de dados considerando um método univariado ou multivariado.

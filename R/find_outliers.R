@@ -1,6 +1,6 @@
 find_outliers = function(data,
                          var,
-                         type,
+                         type = "multivariado",
                          timescd = 4){
   if(type !="univariado" & type!="multivariado"){
     stop("Argumentos inválidos. 'type' deve ser 'univariado' ou 'multivariado'")
