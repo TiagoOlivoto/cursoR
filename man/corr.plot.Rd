@@ -1,6 +1,6 @@
 \name{corr.plot}
 \alias{corr.plot}
-\title{Coeficiente de correlação gáfico-numérico}
+\title{Coeficiente de correlação gráfico-numérico}
 \usage{
 corr.plot(Dataset, prob = 0.05, export = FALSE, file.type = "pdf",
          file.name = NULL, width = 8, height = 7, resolution = 300,

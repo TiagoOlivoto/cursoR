@@ -78,7 +78,7 @@ my_custom_smooth = function(data, mapping, ...) {
   
   ct <- cor.test(x,y)
   
-  r <- unname(ct$estimate)
+  r <- unname(ct$p.value)
   rt <- format(r, digits=2)[1]
   tt <- as.character(rt)
   
@@ -106,7 +106,7 @@ my_custom_smooth = function(data, mapping, ...) {
     )
     }
 
-  if (r > prob) {
+  if (r < prob) {
     p = p + theme(
       panel.background = element_rect(fill=alpha(signcol, alpha)))
 
