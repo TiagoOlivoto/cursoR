@@ -62,8 +62,12 @@ ggplot2::ggplot(cooksd, aes(x = position, y = cooks))+
   geom_hline(yintercept = timescd*mean(cooksd$cooks, na.rm=T))+
   theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
+        axis.ticks.x = element_blank(),
         axis.title.y = element_text(size = 12, colour = "black"),
-        axis.text.y = element_text(size = 12, colour = "black"))+
+        axis.text.y = element_text(size = 12, colour = "black"),
+        panel.border = element_rect(colour = "black", fill=NA, size=1),
+        panel.grid.major.x = element_blank(), panel.grid.major.y = element_blank(),
+        panel.grid.minor.x = element_blank(), panel.grid.minor.y = element_blank())+
   labs(y = "Cook's distance")
 }
 }
