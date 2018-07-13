@@ -121,7 +121,7 @@ distdend = function(data,
       distmethod2 = "correlation"
     } else{distmethod2 = distmethod}
     
-    dend = pvclust::pvclust(t(data),
+    dend = pvclust::pvclust(data.frame(t(data)),
                             method.dist = distmethod2,
                             method.hclust = clustmethod,
                             nboot = nboot)
