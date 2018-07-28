@@ -173,21 +173,27 @@ p = ggplot2::ggplot(iamb2, aes(x = IndAmb, y = Yield))+
   outdat = data.frame(Gen = devtab$Gen, bij = devtab$bij, 
                       sdij = S2di)
   ###############################################
-  ERREGR = 
-    suppressWarnings(stability::stab_reg(
-      .data  = data,
-      .y = Yield,
-      .rep = Rep,
-      .gen  = Gen,
-      .env  = Env))[["StabIndvReg"]]
-
-  ERREGR$SSE =  ERREGR$SSE * NR
-  ERREGR$Delta =  ERREGR$Delta * NR
-  
-  ERREGR$sdij = outdat$sdij
-  
-  ER = list(ANOVA = anovadf,
-            Regression = data.frame(ERREGR))
+  if(length(levels(data$Env))>2){
+    ERREGR = 
+      suppressWarnings(stability::stab_reg(
+        .data  = data,
+        .y = Yield,
+        .rep = Rep,
+        .gen  = Gen,
+        .env  = Env))[["StabIndvReg"]]
+    
+    ERREGR$SSE =  ERREGR$SSE * NR
+    ERREGR$Delta =  ERREGR$Delta * NR
+    
+    ERREGR$sdij = outdat$sdij
+    
+    ER = list(ANOVA = anovadf,
+              Regression = data.frame(ERREGR))
+    
+  } else {
+    warning("Eberhart and Russell regression not estimated due to the lack of degrees of freedom for estimating std. dev.")
+ER = "NULL"}
+ 
   
   return(list(individual = individual,
               ge_means = means,
