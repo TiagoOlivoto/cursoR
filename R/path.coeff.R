@@ -193,6 +193,7 @@ if (brutstepwise == FALSE){
     cat("Selected predictors:",paste0(selectedpred),"\n")
     cat(paste("Now, a stepwise regression procedure will fit ",nproced, " models.", "\n"))
     
+    selectedpred = path$Selectedpred
     for (i in 1:nproced){
       
     FDSel =  FWDselect::selection(x = xxx,
