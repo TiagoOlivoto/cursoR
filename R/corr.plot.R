@@ -16,7 +16,8 @@ corr.plot = function(Dataset,
                      col.up.panel = "gray",
                      col.lw.panel = "gray",
                      col.dia.panel = "black",
-                     pan.spacing = 0.15){
+                     pan.spacing = 0.15,
+                     digits = 2){
 
 my_custom_cor = function(data, mapping, color = I("black"), sizeRange = c(minsize, maxsize), ...) {
     # get the x and y data to use the other code
@@ -29,7 +30,7 @@ my_custom_cor = function(data, mapping, color = I("black"), sizeRange = c(minsiz
     symbols = c("***", "**", "*", ".", " ")
   )
   r = unname(ct$estimate)
-  rt = format(r, digits=2)[1]
+  rt = format(r, digits = digits)[1]
 
   # since we can't print it to get the strsize, just use the max size range
   cex = max(sizeRange)
@@ -79,7 +80,7 @@ my_custom_smooth = function(data, mapping, ...) {
   ct <- cor.test(x,y)
   
   r <- unname(ct$p.value)
-  rt <- format(r, digits=2)[1]
+  rt <- format(r, digits = digits)[1]
   tt <- as.character(rt)
   
   p = ggplot(data = data, mapping = mapping) +

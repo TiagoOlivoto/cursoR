@@ -7,7 +7,7 @@ corr.plot(Dataset, prob = 0.05, export = FALSE, file.type = "pdf",
          sizepoint = 0.5, minsize = 2, maxsize = 3, smooth = FALSE,
          signcol = "green", alpha = 0.15, diagcol = "gray", 
          col.up.panel = "gray", col.lw.panel = "gray",
-         col.dia.panel = "black", pan.spacing = 0.15)
+         col.dia.panel = "black", pan.spacing = 0.15, digits = 2)
 }
 \description{
 Plota o coeficiente de correlação em uma visualização gráfico-numérica
@@ -49,7 +49,8 @@ Plota o coeficiente de correlação em uma visualização gráfico-numérica
 
 
   \item{pan.spacing}{O espaçamento entre os painéis. Padrão é 0.15. Valores maiores aumentam a distância entre os painéis. Se o valor for 0, não há espaço entre os painéis.}
-  
+
+  \item{digits}{O número de digitos a ser mostrado no gráfico.}  
   
 }
 
