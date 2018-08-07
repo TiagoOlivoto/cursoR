@@ -189,9 +189,9 @@ if (brutstepwise == FALSE){
     nproced = npred - 1
     
     cat(paste("The brutestepwise algorithm have selected a set of ",nrow(VIF3),
-              "predictors with largest VIF = ", round(max(VIF3$VIF),3)),
-        ". Now, a stepwise regression procedure will fit ",nproced, " models.", "\n")
-    
+              "predictors with largest VIF = ", round(max(VIF3$VIF),3)),".\n")
+    cat("Selected predictors:",paste0(selectedpred),"\n")
+    cat(paste("Now, a stepwise regression procedure will fit ",nproced, " models.", "\n"))
     
     for (i in 1:nproced){
       
