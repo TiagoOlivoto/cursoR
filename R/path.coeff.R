@@ -7,15 +7,20 @@ path.coeff = function(data,
                       brutstepwise = FALSE){
   
   data = as.data.frame(data)
-  
+  cond = apply(data, 2, function(x) any(is.na(x) | is.infinite(x)))
+  if (length(which(cond == TRUE))>0){
+    warning(paste0("There are missing values in the following variable(s) '", 
+                   names(data)[which(cond == TRUE)], "'. The correlations were computed using pairwise complete observations.", "\n"))
+  }
+
   if (stepwise == TRUE && brutstepwise == TRUE){
-    stop("Error in selecting the stepwise procedure. The arguments 'stepwise' and 'brutstepwise' cannot be TRUE at the same time.")  
+    stop("Error in selecting the stepwise procedure. The arguments 'stepwise' and 'brutstepwise' cannot be TRUE at the same time.", "\n")  
   } else{
   if (is.null(pred) != T && stepwise == TRUE){
-    stop("Multiple arguments for chosing predictor variables. Please, consider passing stepwise/brutstepwise to FALSE if predictors are declared.")
+    stop("Multiple arguments for chosing predictor variables. Please, consider passing stepwise/brutstepwise to FALSE if predictors are declared.", "\n")
   } else{
     if (is.null(pred) != T && brutstepwise == TRUE){
-      stop("Multiple arguments for chosing predictor variables. Please, consider passing stepwise/brutstepwise to FALSE if predictors are declared.")
+      stop("Multiple arguments for chosing predictor variables. Please, consider passing stepwise/brutstepwise to FALSE if predictors are declared.", "\n")
     } else{  
   
 if (brutstepwise == FALSE){
@@ -40,13 +45,13 @@ if (brutstepwise == FALSE){
   x = data[,c(pred)]
   names = colnames(x)
   y = data[, paste(resp)]
-  cor.y = cor(x, y)
-  cor.x = cor(x)
+  cor.y = cor(x, y, use = "pairwise.complete.obs")
+  cor.x = cor(x, use = "pairwise.complete.obs")
   if (is.null(correction) == F){
     diag(cor.x) = diag(cor.x) + correction
     
   } else
-  cor.x = cor(x)
+  cor.x = cor(x, use = "pairwise.complete.obs")
   if (is.null(correction) == T){
     betas = data.frame(matrix(nrow = 101, ncol = length(pred)+1))
     cc = 0
@@ -123,15 +128,15 @@ if (brutstepwise == FALSE){
   names(VIF) = "VIF"
 
   if (NC > 1000){
-    cat(paste0("Multicolinearidade severa! NC = ",round(NC,3), ". Considere incluir um fator de correção ou declarar 'brutstepwise = T' para seleção do melhor modelo."))
+    cat(paste0("Multicolinearidade severa! NC = ",round(NC,3), ". Considere incluir um fator de correção ou declarar 'brutstepwise = T' para seleção do melhor modelo.", "\n"))
   }
   
   if (NC < 100){
-    cat(paste0("A multicolinearidade pode ser considerada fraca. NC = ", round(NC,3), ". Oberve os outros indicadores do modelo para maiores detalhes."))
+    cat(paste0("A multicolinearidade pode ser considerada fraca. NC = ", round(NC,3), ". Oberve os outros indicadores do modelo para maiores detalhes.", "\n"))
   }
   
   if (NC > 100 & NC < 1000 ){
-    cat(paste0("Multicolinearidade moderada! NC = ", round(NC,3), ". Oberve os outros indicadores do modelo para maiores detalhes."))
+    cat(paste0("Multicolinearidade moderada! NC = ", round(NC,3), ". Oberve os outros indicadores do modelo para maiores detalhes.", "\n"))
   }
   
   ultimo = data.frame(Peso=t(AvAvet[c(nrow(AvAvet)),])[-c(1),])
@@ -165,7 +170,7 @@ if (brutstepwise == FALSE){
     ncolresp = which(colnames(data) == resp) 
     yyy = data[, ncolresp]
     xxx = data[-(which( colnames(data) == resp))]
-    cor.xx = cor(xxx)
+    cor.xx = cor(xxx, use = "pairwise.complete.obs")
     VIF = data.frame(diag(solve(cor.xx)))
     names(VIF) = "VIF"
     VIF =  VIF[order(VIF[,"VIF"], decreasing = F), , drop = FALSE]
@@ -174,7 +179,7 @@ if (brutstepwise == FALSE){
       VIF2 = VIF[order(VIF[-1,], decreasing = F), , drop = FALSE]
       pred2 = rownames(VIF2)
       xxx2 = data[rownames(VIF2)]
-      VIF3 = data.frame(VIF = diag(solve(cor(xxx2))))
+      VIF3 = data.frame(VIF = diag(solve(cor(xxx2, use = "pairwise.complete.obs"))))
       VIF3 = VIF3[order(VIF3[,"VIF"], decreasing = F), , drop = FALSE]
       if (max(VIF3$VIF) < 10) break
       VIF = VIF3
@@ -206,13 +211,13 @@ if (brutstepwise == FALSE){
     x = data[,c(pred)]
     names = colnames(x)
     y = data[, paste(resp)]
-    cor.y = cor(x, y)
-    cor.x = cor(x)
+    cor.y = cor(x, y, use = "pairwise.complete.obs")
+    cor.x = cor(x, use = "pairwise.complete.obs")
     if (is.null(correction) == F){
       diag(cor.x) = diag(cor.x) + correction
     
     } else
-      cor.x = cor(x)
+      cor.x = cor(x, use = "pairwise.complete.obs")
     
     if (is.null(correction) == T){
       betas = data.frame(matrix(nrow = 101, ncol = length(pred)+1))
