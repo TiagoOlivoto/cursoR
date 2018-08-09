@@ -31,7 +31,7 @@ find_outliers = function(data,
     response <- readline(prompt="Você deseja remover os outliers e substituir com NA? [yes/no]: ")
     if(response == "y" | response == "yes"){
       data[as.character(var)] <- invisible(var_name)
-      assign(paste0(as.character(match.call()[2]), "_w/o_outliers"), data, envir=.GlobalEnv)
+      assign(paste0(as.character(match.call()[2]), "_outliers"), data, envir=.GlobalEnv)
       cat("Outliers removidos com sucesso", "\n")
 
     } else{
