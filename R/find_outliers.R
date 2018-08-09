@@ -8,6 +8,7 @@ find_outliers = function(data,
   
   if( type == "univariado"){
     var_name <- as.numeric(unlist(as.data.frame(data[(match(c(var), names(data)))])))
+    tot <- sum(!is.na(var_name))
     na1 <- sum(is.na(var_name))
     m1 <- mean(var_name, na.rm = T)
     par(mfrow=c(2, 2), oma=c(0,0,2,0))
@@ -29,13 +30,12 @@ find_outliers = function(data,
     cat("Média se removermos os outliers:", round(m2, 2), "\n")
     response <- readline(prompt="Você deseja remover os outliers e substituir com NA? [yes/no]: ")
     if(response == "y" | response == "yes"){
-      data[as.character(substitute(var))] <- invisible(var_name)
-      assign(as.character(as.list(match.call())$data), data, envir = .GlobalEnv)
+      data[as.character(var)] <- invisible(var_name)
+      assign(paste0(as.character(match.call()[2]), "_outiliers"), data, envir=.GlobalEnv)
       cat("Outliers removidos com sucesso", "\n")
-      return(invisible(data))
+
     } else{
       cat("Nada foi mudado", "\n")
-      return(invisible(var_name))
     }
     }
     if((na2 - na1)==0){
