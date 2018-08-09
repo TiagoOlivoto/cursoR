@@ -4,15 +4,21 @@ path.coeff = function(data,
                       exclude = FALSE,
                       correction = NULL,
                       stepwise = FALSE,
-                      brutstepwise = FALSE){
+                      brutstepwise = FALSE,
+                      missingval = "pairwise.complete.obs"){
   
   data = as.data.frame(data)
   cond = apply(data, 2, function(x) any(is.na(x) | is.infinite(x)))
+  missvarname = names(data)[which(cond == TRUE)]
   if (length(which(cond == TRUE))>0){
-    warning(paste0("There are missing values in the following variable(s) '", 
-                   names(data)[which(cond == TRUE)], "'. The correlations were computed using pairwise complete observations.", "\n"))
+    cat("Warning message:\n")
+    cat("There are missing values in the following variable(s) of the dataset: \n")
+    cat(missvarname, sep = ', ', "\n")
+    cat("The correlations were computed using pairwise complete observations.\n")
+    cat("See the 'missingval' argument for further details.", "\n")
+    cat("------------------------------------------------------------------------", "\n","\n")
   }
-
+  
   if (stepwise == TRUE && brutstepwise == TRUE){
     stop("Error in selecting the stepwise procedure. The arguments 'stepwise' and 'brutstepwise' cannot be TRUE at the same time.", "\n")  
   } else{
@@ -45,13 +51,13 @@ if (brutstepwise == FALSE){
   x = data[,c(pred)]
   names = colnames(x)
   y = data[, paste(resp)]
-  cor.y = cor(x, y, use = "pairwise.complete.obs")
-  cor.x = cor(x, use = "pairwise.complete.obs")
+  cor.y = cor(x, y, use = missingval)
+  cor.x = cor(x, use = missingval)
   if (is.null(correction) == F){
     diag(cor.x) = diag(cor.x) + correction
     
   } else
-  cor.x = cor(x, use = "pairwise.complete.obs")
+  cor.x = cor(x, use = missingval)
   if (is.null(correction) == T){
     betas = data.frame(matrix(nrow = 101, ncol = length(pred)+1))
     cc = 0
@@ -136,7 +142,9 @@ if (brutstepwise == FALSE){
   }
   
   if (NC > 100 & NC < 1000 ){
-    cat(paste0("Multicolinearidade moderada! NC = ", round(NC,3), ". Oberve os outros indicadores do modelo para maiores detalhes.", "\n"))
+    cat(paste0("Multicolinearidade moderada! \n",
+   "NC = ", round(NC,3), "\n",
+   "Oberve os outros indicadores do modelo para maiores detalhes.", "\n"))
   }
   
   ultimo = data.frame(Peso=t(AvAvet[c(nrow(AvAvet)),])[-c(1),])
@@ -170,7 +178,7 @@ if (brutstepwise == FALSE){
     ncolresp = which(colnames(data) == resp) 
     yyy = data[, ncolresp]
     xxx = data[-(which( colnames(data) == resp))]
-    cor.xx = cor(xxx, use = "pairwise.complete.obs")
+    cor.xx = cor(xxx, use = missingval)
     VIF = data.frame(diag(solve(cor.xx)))
     names(VIF) = "VIF"
     VIF =  VIF[order(VIF[,"VIF"], decreasing = F), , drop = FALSE]
@@ -179,7 +187,7 @@ if (brutstepwise == FALSE){
       VIF2 = VIF[order(VIF[-1,], decreasing = F), , drop = FALSE]
       pred2 = rownames(VIF2)
       xxx2 = data[rownames(VIF2)]
-      VIF3 = data.frame(VIF = diag(solve(cor(xxx2, use = "pairwise.complete.obs"))))
+      VIF3 = data.frame(VIF = diag(solve(cor(xxx2, use = missingval))))
       VIF3 = VIF3[order(VIF3[,"VIF"], decreasing = F), , drop = FALSE]
       if (max(VIF3$VIF) < 10) break
       VIF = VIF3
@@ -211,13 +219,13 @@ if (brutstepwise == FALSE){
     x = data[,c(pred)]
     names = colnames(x)
     y = data[, paste(resp)]
-    cor.y = cor(x, y, use = "pairwise.complete.obs")
-    cor.x = cor(x, use = "pairwise.complete.obs")
+    cor.y = cor(x, y, use = missingval)
+    cor.x = cor(x, use = missingval)
     if (is.null(correction) == F){
       diag(cor.x) = diag(cor.x) + correction
     
     } else
-      cor.x = cor(x, use = "pairwise.complete.obs")
+      cor.x = cor(x, use = missingval)
     
     if (is.null(correction) == T){
       betas = data.frame(matrix(nrow = 101, ncol = length(pred)+1))

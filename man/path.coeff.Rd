@@ -3,7 +3,7 @@
 \title{Análise de trilha e seleção de variáveis para preditores com mínima multicolinearidade}
 \usage{
 path.coeff(data, resp, pred = NULL, exclude = FALSE, correction = NULL,
-          stepwise = FALSE, brutstepwise = FALSE)
+          stepwise = FALSE, brutstepwise = FALSE, missingval = "pairwise.complete.obs")
 }
 \description{
 Estima os efeitos diretos e indiretos com base em um arquivo de dados contendo um conjunto de variáveis. Um algorítmo é implementado visando seleção de um conjunto de preditores com mínima multicolinearidade e alto poder explicativo.
@@ -25,6 +25,8 @@ Estima os efeitos diretos e indiretos com base em um arquivo de dados contendo u
 
   \item{brutstepwise}{Argumento lógico, padrão FALSE. Se TRUE, uma série de regressões stepwise são ajustados.}
 
+  \item{missingval}{Como lidar com valores perdidos. O padrão é \code{missingval = "pairwise.complete.obs"}, ou seja, a correlação é estimada com todos os pares que contém observações completas. Para maiores detalhes, veja \code{?cor}.}
+  
 }
 
 \value{
