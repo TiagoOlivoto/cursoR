@@ -29,7 +29,8 @@ Imports: corrplot,
          plotly, 
          reshape,
          plot3D,
-         hydroGOF
+         hydroGOF,
+         ggrepel
 RoxygenNote: 6.0.1
 
 
