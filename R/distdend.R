@@ -185,47 +185,51 @@ if (pvclust == TRUE){
 
 if (results == TRUE){
   if(dendrogram == TRUE){
-   if(selvar ==TRUE){
-  return(list(statistics = statistics,
-              models = ModelEstimates,
-              cofgrap = cofgrap,
-              graphic = out,
-              distances = mat,
-              cl.stats = cl.stats,
-              cl.names = cl.names,
-              cophenetic = cof,
-              cut = pcorte,
-              pval = pval,
-              dend = dend))
+   if(selvar == TRUE){
+     return(structure(list(statistics = statistics,
+                           models = ModelEstimates,
+                           cofgrap = cofgrap,
+                           graphic = out,
+                           distances = mat,
+                           cl.stats = cl.stats,
+                           cl.names = cl.names,
+                           cophenetic = cof,
+                           cut = pcorte,
+                           pval = pval,
+                           dend = dend),
+                      class = "distdend"))
    }else{
-     return(list(graphic = out,
-                 distances = mat,
-                 cl.stats = cl.stats,
-                 cl.names = cl.names,
-                 cophenetic = cof,
-                 cut = pcorte,
-                 pval = pval,
-                 dend = dend))
+     return(structure(list(graphic = out,
+                           distances = mat,
+                           cl.stats = cl.stats,
+                           cl.names = cl.names,
+                           cophenetic = cof,
+                           cut = pcorte,
+                           pval = pval,
+                           dend = dend),
+                      class = "distdend"))
      }
   } else{
-    if(selvar ==TRUE){
-      return(list(statistics = statistics,
-                  models = ModelEstimates,
-                  distances = mat,
-                  cl.stats = cl.stats,
-                  cl.names = cl.names,
-                  cophenetic = cof,
-                  cut = pcorte,
-                  pval = pval,
-                  dend = dend))
+    if(selvar == TRUE){
+      return(structure(list(statistics = statistics,
+                            models = ModelEstimates,
+                            distances = mat,
+                            cl.stats = cl.stats,
+                            cl.names = cl.names,
+                            cophenetic = cof,
+                            cut = pcorte,
+                            pval = pval,
+                            dend = dend),
+                       class = "distdend"))
     }else{
-      return(list(distances = mat,
-                  cl.stats = cl.stats,
-                  cl.names = cl.names,
-                  cophenetic = cof,
-                  cut = pcorte,
-                  pval = pval,
-                  dend = dend))
+      return(structure(list(distances = mat,
+                            cl.stats = cl.stats,
+                            cl.names = cl.names,
+                            cophenetic = cof,
+                            cut = pcorte,
+                            pval = pval,
+                            dend = dend),
+                       class = "distdend"))
     }
   }
 } else{
