@@ -6,7 +6,11 @@ corr.plot = function(Dataset,
                      width = 8,
                      height = 7,
                      resolution = 300,
-                     sizepoint = 0.5,
+                     size.point = 0.5,
+                     shape.point = 19,
+                     alpha.point = 1,
+                     fill.point = NULL,
+                     col.point = "black",
                      minsize = 2,
                      maxsize = 3,
                      smooth = FALSE,
@@ -19,6 +23,11 @@ corr.plot = function(Dataset,
                      pan.spacing = 0.15,
                      digits = 2){
 
+  w = c(21:25)
+  if(is.null(fill.point)==TRUE && any(w == shape.point)){
+    stop("If 'shape.point' is a value between 21 and 25, you must provide a color for fill the shape using the argument 'fill.point.'")
+  }
+  
 my_custom_cor = function(data, mapping, color = I("black"), sizeRange = c(minsize, maxsize), ...) {
     # get the x and y data to use the other code
   x = GGally::eval_data_col(data, mapping$x)
@@ -83,9 +92,15 @@ my_custom_smooth = function(data, mapping, ...) {
   rt <- format(r, digits = digits)[1]
   tt <- as.character(rt)
   
-  p = ggplot(data = data, mapping = mapping) +
-    geom_point(color = I("black"), size = sizepoint) +
-    theme_classic() +
+  p = ggplot(data = data, mapping = mapping)
+    
+    if(is.null(fill.point)==FALSE){
+      p = p + geom_point(color = I(col.point), fill = fill.point, shape = shape.point, size = size.point, alpha = alpha.point)
+    } else{
+      p = p + geom_point(color = I(col.point), shape = shape.point, size = size.point, alpha = alpha.point)
+    }
+  
+  p = p + theme_classic() +
     theme(
       panel.background = element_rect(fill = "white", color = col.lw.panel),
       axis.line = element_blank(),
@@ -94,9 +109,15 @@ my_custom_smooth = function(data, mapping, ...) {
       axis.text.x = element_blank()
     )
     if(smooth == TRUE){
-      p = ggplot(data = data, mapping = mapping) +
-        geom_point(color = I("black"), size = sizepoint) +
-    geom_smooth(method = "lm", size=0.3, color = I("red"), ...)+
+      p = ggplot(data = data, mapping = mapping)
+        
+        if(is.null(fill.point)==FALSE){
+          p = p + geom_point(color = I(col.point), fill = fill.point, shape = shape.point, size = size.point, alpha = alpha.point)
+        } else{
+          p = p + geom_point(color = I(col.point), shape = shape.point, size = size.point, alpha = alpha.point)
+        }
+      
+  p + geom_smooth(method = "lm", size=0.3, color = I("red"), ...)+
     theme_classic() +
     theme(
       panel.background = element_rect(fill = "white", color = col.lw.panel),
