@@ -190,6 +190,7 @@ if (results == TRUE){
                            models = ModelEstimates,
                            cofgrap = cofgrap,
                            graphic = out,
+                           hc = hc,
                            distances = mat,
                            cl.stats = cl.stats,
                            cl.names = cl.names,
@@ -200,6 +201,7 @@ if (results == TRUE){
                       class = "distdend"))
    }else{
      return(structure(list(graphic = out,
+                           hc = hc,
                            distances = mat,
                            cl.stats = cl.stats,
                            cl.names = cl.names,
