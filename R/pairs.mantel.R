@@ -188,7 +188,7 @@ my_custom_smooth = function(data, mapping, ...) {
       )
     if (pval < prob) {
       p = p + theme(
-        panel.background = element_rect(fill=alpha(signcol, alpha)))
+        panel.background = element_rect(fill = scales::alpha(signcol, alpha)))
       
     }
     p
