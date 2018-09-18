@@ -27,7 +27,7 @@ ge_stats = function (data,
     NR = length(unique(data2$Rep))
     CV = sqrt(MSE)/mean(data2$Yield)*100
     h2 = (MSG - MSE)/MSG
-    if(h2<0) {AS = 0} else {AS = sqrt(h2)}
+    if (h2 < 0) {AS = 0} else {AS = sqrt(h2)}
     temp[i,1] = paste(envnam)
     temp[i,2] = mean(data2$Yield)
     temp[i,3] = MSB
@@ -40,8 +40,7 @@ ge_stats = function (data,
     temp[i,10] = CV
     temp[i,11] = h2
     temp[i,12] = AS
-    temp[i,13] = 1/(2-AS^2)
-    
+
     actualenv = actualenv + 1
     
   }
