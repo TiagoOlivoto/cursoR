@@ -11,12 +11,12 @@ ge_stats = function (data,
     data[,n] = as.factor(data[,n])
   }
   
-  temp = data.frame(matrix(".",length(unique(data$Env)),13))
+  temp = data.frame(matrix(".",length(unique(data$Env)),12))
   actualenv = 0
-  for (n in c(1:13)) {
+  for (n in c(1:12)) {
     temp[,n] = as.numeric(temp[,n])
   }
-  names(temp) = c("ENV", "Mean", "MSblock", "MSgen", "MSres", "Fcal(Blo)", "Pr>F(Blo)","Fcal(Gen)", "Pr>F(Gen)", "CV(%)", "h2", "AS", "R2")
+  names(temp) = c("ENV", "Mean", "MSblock", "MSgen", "MSres", "Fcal(Blo)", "Pr>F(Blo)","Fcal(Gen)", "Pr>F(Gen)", "CV(%)", "h2", "AS")
   for (i in 1:length(unique(data$Env))){
     envnam = levels(data$Env)[actualenv + 1]
     data2 = subset(data, Env == paste0(envnam))
@@ -27,7 +27,7 @@ ge_stats = function (data,
     NR = length(unique(data2$Rep))
     CV = sqrt(MSE)/mean(data2$Yield)*100
     h2 = (MSG - MSE)/MSG
-    AS = sqrt(h2)
+    if(h2<0) {AS = 0} else {AS = sqrt(h2)}
     temp[i,1] = paste(envnam)
     temp[i,2] = mean(data2$Yield)
     temp[i,3] = MSB
