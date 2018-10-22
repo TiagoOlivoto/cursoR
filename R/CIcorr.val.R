@@ -11,5 +11,5 @@ CIcorr.val = function(r, n) {
                                     "\nConfidence interval: ", round(CI,4),
                                     "\nTrue parameter range from: ", round(LP,4)," to ",
                                     round(UP,4)),"\n")
-  cat("-------------------------------------------------")
+  cat("-------------------------------------------------","\n")
 }

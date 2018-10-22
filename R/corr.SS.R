@@ -7,5 +7,5 @@ corr.SS = function(r, CI) {
                                          "\nCorrelation coefficient: ", r,
                                          "\n95% half-width CI: ", CI,
                                          "\nRequired sample size: ", round(n,0)),"\n")
-  cat("-------------------------------------------------")
+  cat("-------------------------------------------------","\n")
   }
