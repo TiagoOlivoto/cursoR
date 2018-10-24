@@ -1,4 +1,4 @@
-pairs.mantel = function(data = list(x, y, ...),
+pairs_mantel = function(data = list(x, y, ...),
                         nrepet = 1000,
                         names = NULL,
                         prob = 0.05,

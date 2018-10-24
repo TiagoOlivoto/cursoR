@@ -22,7 +22,6 @@ Com base em tres colunas de dados (duas colunas com fatores e uma coluna com val
  }
  
  
-}
 
 \examples{
 data = data.frame(

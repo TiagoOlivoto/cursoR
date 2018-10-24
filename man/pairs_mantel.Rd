@@ -1,8 +1,8 @@
-\name{pairs.mantel}
-\alias{pairs.mantel}
+\name{pairs_mantel}
+\alias{pairs_mantel}
 \title{Pares de correlação de mantel para matrizes de distância}
 \usage{
-corr.plot(data = list(x, y, ...), nrepet = 1000, names = NULL, 
+pairs_mantel(data = list(x, y, ...), nrepet = 1000, names = NULL, 
           prob = 0.05, diag = FALSE, export = FALSE, main = "auto",
           file.type = "pdf", file.name = NULL, width = 8, 
           height = 7, resolution = 300, size.point = 0.5, 
@@ -13,7 +13,7 @@ corr.plot(data = list(x, y, ...), nrepet = 1000, names = NULL,
           col.dia.panel = "black", pan.spacing = 0.15, digits = 2)
 }
 \description{
-Plota o coeficiente de correlação de mantel em uma 
+Plota o coeficiente de correlação de mantel de uma lista de objetos em formato de matriz.
 
 }
 

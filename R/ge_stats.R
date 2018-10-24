@@ -138,7 +138,7 @@ p = ggplot2::ggplot(iamb2, aes(x = IndAmb, y = Yield))+
   rps = length(levels(data$Rep))
   en = length(levels(data$Env))
   S2di = (deltaij/(en - 2)) - (S2e/rps)
-  meandf1 = data.frame(reshape::melt(meandf, id.var = "Gen"))
+  meandf1 = data.frame(reshape2::melt(meandf, id.var = "Gen"))
   model2 <- lm(value ~ Gen + variable, data = meandf1)
   amod2 <- anova(model2)
   SSL = amod2$"Sum Sq"[2]
